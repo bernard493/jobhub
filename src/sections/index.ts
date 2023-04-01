@@ -4,4 +4,4 @@ export {ExcitingJobs} from './ExcitingJobs';
 export {Hero} from './Hero';
 export {JobCategory} from './JobCategory';
 export {Review} from './Review';
-export {Talent} from './talent';
+export {Talent} from './Talent';
