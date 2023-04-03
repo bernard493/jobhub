@@ -84,8 +84,8 @@ export const Hero: FunctionComponent = () => {
   };
 
   return (
-    <main className="">
-      <div className="flex flex-col md:grid  md:grid-cols-2 md:gap-[8rem]">
+    <main className="pt-7">
+      <div className="flex flex-col md:grid  md:grid-cols-2 md:gap-[8rem] xl:gap-[15rem]">
         <div className="pt-[5rem] space-y-7 md:space-y-0">
           <div className="w-full">
             <h1 className="text-4xl text-gray-700 text-center  font-bold md:text-5xl">
@@ -167,7 +167,7 @@ export const Hero: FunctionComponent = () => {
             alt=""
             className=" object-cover object-center rounded-3xl md:w-[20rem] md:h-[25rem]"
           />
-          <div className=" flex justify-center outline outline-offset-6 outline-7 outline-white h-[8rem] w-[14rem] absolute top-[36rem] md:top-80 md:right-[40rem] rounded-xl">
+          <div className=" flex justify-center outline outline-offset-6 outline-7 outline-white h-[8rem] w-[14rem] absolute top-[36rem] md:top-80 md:right-[25rem] xl:top-80 xl:right-[35rem] rounded-xl">
             {/** 
           * 
          <ReactPlayer ref={playerRef} url={VIDEO_PATH} controls={true} playing={false} muted={true} width={'100%'} height={'100%'} style={ videoStyle} />
