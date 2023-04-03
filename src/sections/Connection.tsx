@@ -12,20 +12,33 @@ import { useFetch } from "../Hooks/useFetch";
 import { checkImageURL } from "../utils/index";
 
 interface JobDetailInter {
-  employer_logo:string
-  employer_name : string
-  job_country : string
-  job_title : string
-  job_min_salary : string
-  job_max_salary : string
-  job_google_link : string
+  job_id: string;
+  employer_logo: string;
+  employer_name: string;
+  job_country: string;
+  job_title: string;
+  job_min_salary: string;
+  job_max_salary: string;
+  job_google_link: string;
+  job_description: string;
+  job_required_experience: {
+    experience_mentioned: boolean;
+    required_experience_in_months: number;
+  };
+  job_is_remote: boolean;
+  job_employment_type: string;
 }
 
-
-const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
+const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
   return (
     <Link to={""}>
-      <div className="bg-white outline outline-offset-2 outline-2 group  outline-gray-200  hover:outline-blue-500 hover:drop-shadow-xl rounded-lg">
+      <div
+        data-te-animation-init
+        data-te-animation-reset="true"
+        data-te-animation="[fade-in_1s_ease-in-out]"
+        key={job.job.job_id}
+        className="bg-white outline outline-offset-2 outline-2 group  outline-gray-200  hover:outline-blue-500 hover:drop-shadow-xl rounded-lg"
+      >
         <div className="p-[0.5rem] space-y-2 md:p-[1rem]">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -34,10 +47,10 @@ const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
                   // uri: checkImageURL(jobDetail?.employer_logo)
                   //   ?
                   job.job.employer_logo
-                    // : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
+                  // : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
                 }
                 alt=""
-                className="h-[4rem] w-[4rem] object-contain"
+                className="h-[4rem] w-[4rem] object-contain rounded-xl"
               />
               <div className="">
                 <p className="text-gray-500 font-bold font-Poppins text-md">
@@ -45,9 +58,6 @@ const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
                 </p>
                 <p className="text-gray-800 font-bold font-Poppins text-lg">
                   {job.job.job_title}
-                </p>
-                <p className="text-gray-400 font-bold text-sm">
-                  Posted 10m ago
                 </p>
               </div>
             </div>
@@ -60,7 +70,9 @@ const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
                   Salary
                 </p>
                 <p className="text-gray-600 font-bold text-sm">
-                  {job.job.job_min_salary}$ - {job.job.job_max_salary}$
+                  {job.job.job_min_salary !== null
+                    ? `${job.job.job_min_salary}$ - ${job.job.job_max_salary}$ `
+                    : "n/a"}
                 </p>
               </div>
             </div>
@@ -69,14 +81,22 @@ const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
             <div className="flex items-center space-x-2">
               <MdOutlineBusinessCenter className="text-gray-400 font-bold text-sm h-5 w-5" />
               <p className="text-gray-400 font-bold font-Poppins text-sm">
-                2-3 Year experincer Full Time
+                {job.job.job_required_experience.experience_mentioned
+                  ? ` ${
+                      job.job.job_required_experience
+                        .required_experience_in_months / 12
+                    }  Years experiences, `
+                  : " "}
+                {job.job.job_employment_type === "FULLTIME"
+                  ? "Full Time"
+                  : "Contract"}
               </p>
             </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="w-[13rem] md:w-[20rem]">
-              <p className="text-gray-600 font-bold text-md">
-                we are looking for loihj hjguj jmghjgmuj hm
+              <p className="text-gray-600 font-bold text-md line-clamp-2 ">
+                {job.job.job_description}
               </p>
             </div>
             <div>
@@ -95,20 +115,27 @@ const JobCard = (job:{job:JobDetailInter}):JSX.Element => {
 
 export const Connection = () => {
   const [checked, setChecked] = useState(false);
-  const [findJobs, setFindJobs] = useState("part_time");
+  const [findJobs, setFindJobs] = useState("FULLTIME");
   const { data, isLoading, error, refetch } = useFetch("search", {
     query: "React developer",
     num_pages: "1",
   });
+  const [filleterJobs, setFilleterJobs] = useState<JobDetailInter[]>([]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
+
+    // setFilleterJobs( prev =>  )
   };
 
   useMemo(() => {
-    checked ? setFindJobs("full_time") : setFindJobs("part_time");
+    checked ? setFindJobs("CONTRACTOR") : setFindJobs("FULLTIME");
   }, [checked]);
+  // console.log(filleterJobs)
+  //  console.log(checked);
 
-  console.log(data);
+  // const jobs = data.filter((eachJob:JobDetailInter) => eachJob.job_employment_type  === findJobs)
+
   return (
     <div className="py-[5rem]">
       <div className="text-center space-y-8">
@@ -120,7 +147,7 @@ export const Connection = () => {
             className="font-bold text-sm"
             style={{ color: `${!checked ? "#403FF2" : "#999999"}` }}
           >
-            Part Time
+            Ful Time
           </p>
           <Switch
             checked={checked}
@@ -132,16 +159,36 @@ export const Connection = () => {
             className="font-bold text-sm"
             style={{ color: `${checked ? "#403FF2" : "#999999"}` }}
           >
-            Full Time
+            Contract
           </p>
         </div>
       </div>
       <div className="grid grid-rows-1 md:grid-cols-2 gap-8 py-[2rem]">
-        {!isLoading ? (
-          data.slice(6).map((job) => <JobCard job={job} />)
-        ) : (
-          <h2>Loading....</h2>
-        )}
+        {!isLoading
+          ? data
+              .filter(
+                (eachJob: JobDetailInter) =>
+                  eachJob.job_employment_type === findJobs
+              )
+              .slice(0, 6)
+              .map((job) => <JobCard job={job} />)
+          : [1, 2, 3, 4,].map((Number) => (
+              <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="rounded-full bg-slate-200 h-10 w-10"></div>
+                  <div className="flex-1 space-y-6 py-1">
+                    <div className="h-2 bg-slate-200 rounded"></div>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+                        <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+                      </div>
+                      <div className="h-2 bg-slate-200 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
       </div>
       <div className=" flex justify-center  py-[2rem]">
         <Link to={""}>

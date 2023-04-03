@@ -32,7 +32,7 @@ export const useFetch = (endpoint:string,query:queryInter) => {
           setData(response.data.data);
           setIsLoading(false);
         } catch (error) {
-        //   setError(error);
+        //  setError(error.message);
           console.log(error)
         } finally {
           setIsLoading(false);
