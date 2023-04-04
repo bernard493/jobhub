@@ -50,13 +50,13 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
                   // : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
                 }
                 alt=""
-                className="h-[4rem] w-[4rem] object-contain rounded-xl"
+                className="h-[3rem] w-[3rem] object-contain rounded-xl"
               />
-              <div className="">
-                <p className="text-gray-500 font-bold font-Poppins text-md">
-                  {job.job.employer_name},{job.job.job_country}
+              <div className="md:w-[20rem]">
+                <p className="text-gray-500 font-bold font-Poppins text-sm">
+                  {job.job.employer_name}, {job.job.job_country}
                 </p>
-                <p className="text-gray-800 font-bold font-Poppins text-lg">
+                <p className="text-gray-800 font-bold font-Poppins text-sm ">
                   {job.job.job_title}
                 </p>
               </div>
@@ -66,21 +66,21 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
                 <BsBookmark className="text-gray-800 font-bold  h-5 w-5 cursor-pointer " />
               </div>
               <div className="">
-                <p className="text-end text-[#403FF2] font-bold font-Poppins">
+                <p className="text-end text-[#403FF2] font-bold font-Poppins text-sm">
                   Salary
                 </p>
                 <p className="text-gray-600 font-bold text-sm">
                   {job.job.job_min_salary !== null
                     ? `${job.job.job_min_salary}$ - ${job.job.job_max_salary}$ `
-                    : "n/a"}
+                    : ""}
                 </p>
               </div>
             </div>
           </div>
           <div className="pt-[0.5rem]">
             <div className="flex items-center space-x-2">
-              <MdOutlineBusinessCenter className="text-gray-400 font-bold text-sm h-5 w-5" />
-              <p className="text-gray-400 font-bold font-Poppins text-sm">
+              <MdOutlineBusinessCenter className="text-gray-400 font-bold text-sm h-4 w-4" />
+              <p className="text-gray-400 font-bold font-Poppins text-[0.8rem]">
                 {job.job.job_required_experience.experience_mentioned
                   ? ` ${
                       job.job.job_required_experience
@@ -95,13 +95,13 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
           </div>
           <div className="flex items-center justify-between">
             <div className="w-[13rem] md:w-[20rem]">
-              <p className="text-gray-600 font-bold text-md line-clamp-2 ">
+              <p className="text-gray-600 font-bold text-sm line-clamp-2 ">
                 {job.job.job_description}
               </p>
             </div>
             <div>
               <Link to={job.job.job_google_link}>
-                <button className="bg-gray-300 text-gray-800 text-sm h-[2.5rem] w-[7rem] rounded-lg group-hover:bg-[#403FF2] group-hover:text-white">
+                <button className="bg-gray-300 text-gray-800 text-[0.8rem] h-[2.5rem] w-[7rem] rounded-lg group-hover:bg-[#403FF2] group-hover:text-white">
                   <span className="font-bold font-Poppins">Apply now</span>
                 </button>
               </Link>

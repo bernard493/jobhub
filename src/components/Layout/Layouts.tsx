@@ -5,7 +5,7 @@ import { Navbar } from "../Navbar/Navbar";
 import svg from "../../assets/img/blob.svg";
 export const Layouts = () => {
   return (
-    <div className="bg-[#f8f6f6]">
+    <div className="bg-[#f8f4f4]">
       <div className="">
         <div className=" hidden absolute -top-[7rem]  -right-[0rem] md:block">
           <img src={svg} alt="" className="h-[40rem] w-[40rem] " />
