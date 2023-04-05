@@ -9,7 +9,6 @@ export const HomePage = () => {
       <Connection />
       <EasySteps/>
       <ExcitingJobs/>
-      <JobCategory/>
       <Review/>
     </>
   );

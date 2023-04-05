@@ -69,7 +69,7 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
                 <p className="text-end text-[#403FF2] font-bold font-Poppins text-sm">
                   Salary
                 </p>
-                <p className="text-gray-600 font-bold text-sm">
+                <p className="text-gray-600 font-bold text-[0.7rem]">
                   {job.job.job_min_salary !== null
                     ? `${job.job.job_min_salary}$ - ${job.job.job_max_salary}$ `
                     : ""}
