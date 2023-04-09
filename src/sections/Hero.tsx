@@ -161,13 +161,13 @@ export const Hero: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <div className="w-[20rem] h-[20rem] rounded-full">
+        <div className="w-[20rem] h-[20rem] rounded-full md:pt-[5rem]">
           <img
             src={heroImg}
             alt=""
             className=" object-cover object-center rounded-3xl md:w-[20rem] md:h-[25rem]"
           />
-          <div className=" flex justify-center outline outline-offset-6 outline-7 outline-white h-[8rem] w-[14rem] absolute top-[36rem] md:top-80 md:right-[25rem] xl:top-80 xl:right-[35rem] rounded-xl">
+          <div className=" flex justify-center outline outline-offset-6 outline-7 outline-white h-[8rem] w-[14rem] absolute top-[36rem] md:top-[28rem] md:right-[25rem] xl:top-[28rem] xl:right-[35rem] rounded-xl">
             {/** 
           * 
          <ReactPlayer ref={playerRef} url={VIDEO_PATH} controls={true} playing={false} muted={true} width={'100%'} height={'100%'} style={ videoStyle} />

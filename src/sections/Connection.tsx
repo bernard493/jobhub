@@ -19,7 +19,7 @@ interface JobDetailInter {
   job_title: string;
   job_min_salary: string;
   job_max_salary: string;
-  job_google_link: string;
+  job_apply_link: string;
   job_description: string;
   job_required_experience: {
     experience_mentioned: boolean;
@@ -31,7 +31,7 @@ interface JobDetailInter {
 
 const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
   return (
-    <Link to={""}>
+    <Link to={`jobdetails/${job.job.job_id}`}>
       <div
         data-te-animation-init
         data-te-animation-reset="true"
@@ -100,7 +100,7 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
               </p>
             </div>
             <div>
-              <Link to={job.job.job_google_link}>
+              <Link to={job.job.job_apply_link}>
                 <button className="bg-gray-300 text-gray-800 text-[0.8rem] h-[2.5rem] w-[7rem] rounded-lg group-hover:bg-[#403FF2] group-hover:text-white">
                   <span className="font-bold font-Poppins">Apply now</span>
                 </button>
@@ -117,25 +117,21 @@ export const Connection = () => {
   const [checked, setChecked] = useState(false);
   const [findJobs, setFindJobs] = useState("FULLTIME");
   const { data, isLoading, error, refetch } = useFetch("search", {
-    query: "React developer",
+    query: findJobs,
     num_pages: "1",
   });
-  const [filleterJobs, setFilleterJobs] = useState<JobDetailInter[]>([]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-
-    // setFilleterJobs( prev =>  )
   };
 
   useMemo(() => {
     checked ? setFindJobs("CONTRACTOR") : setFindJobs("FULLTIME");
+    refetch();
   }, [checked]);
-  // console.log(filleterJobs)
-  //  console.log(checked);
 
-  // const jobs = data.filter((eachJob:JobDetailInter) => eachJob.job_employment_type  === findJobs)
-
+      console.log(error)
+   
   return (
     <div className="py-[5rem]">
       <div className="text-center space-y-8">
@@ -147,7 +143,7 @@ export const Connection = () => {
             className="font-bold text-sm"
             style={{ color: `${!checked ? "#403FF2" : "#999999"}` }}
           >
-            Ful Time
+            Full Time
           </p>
           <Switch
             checked={checked}
@@ -172,7 +168,7 @@ export const Connection = () => {
               )
               .slice(0, 6)
               .map((job) => <JobCard job={job} />)
-          : [1, 2, 3, 4,].map((Number) => (
+          : [1, 2, 3, 4].map((Number) => (
               <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                 <div className="animate-pulse flex space-x-4">
                   <div className="rounded-full bg-slate-200 h-10 w-10"></div>
@@ -191,7 +187,7 @@ export const Connection = () => {
             ))}
       </div>
       <div className=" flex justify-center  py-[2rem]">
-        <Link to={""}>
+        <Link to={"dashboard"}>
           <button className=" text-sm h-[3rem] w-[8rem] rounded-lg bg-[#403FF2] text-white">
             <span className="font-bold font-Poppins">Browse all</span>
           </button>

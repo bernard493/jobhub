@@ -1,24 +1,16 @@
 import React from "react";
 import { Routers } from "../../Routers/Routers";
 import { Footer } from "../Footer/Footer";
-import { Navbar } from "../Navbar/Navbar";
-import svg from "../../assets/img/blob.svg";
+import { NavbarComp } from "../Navbar/NavbarComp";
+
 export const Layouts = () => {
   return (
-    <div className="bg-[#f8f4f4]">
+    <div className="bg-[#f7f5f5]">
+      <NavbarComp />
       <div className="">
-        <div className=" hidden absolute -top-[7rem]  -right-[0rem] md:block">
-          <img src={svg} alt="" className="h-[40rem] w-[40rem] " />
-        </div>
-        <div className=" relative ">
-          <Navbar />
-        <div className=" relative px-6 md:px-[8rem] xl:px-[15rem]">
-
-          <Routers />
-          </div>
-        </div>
+        <Routers />
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
