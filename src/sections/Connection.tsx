@@ -10,33 +10,16 @@ import { BsBookmark } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useFetch } from "../Hooks/useFetch";
 import { checkImageURL } from "../utils/index";
+import { JobDetailInter } from "../model";
 
-interface JobDetailInter {
-  job_id: string;
-  employer_logo: string;
-  employer_name: string;
-  job_country: string;
-  job_title: string;
-  job_min_salary: string;
-  job_max_salary: string;
-  job_apply_link: string;
-  job_description: string;
-  job_required_experience: {
-    experience_mentioned: boolean;
-    required_experience_in_months: number;
-  };
-  job_is_remote: boolean;
-  job_employment_type: string;
-}
-
-const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
+const HomeJobCard: React.FC<JobDetailInter> = (job): JSX.Element => {
   return (
-    <Link to={`jobdetails/${job.job.job_id}`}>
+    <Link to={`jobdetails/${job.job_id}`}>
       <div
         data-te-animation-init
         data-te-animation-reset="true"
         data-te-animation="[fade-in_1s_ease-in-out]"
-        key={job.job.job_id}
+        key={job.job_id}
         className="bg-white outline outline-offset-2 outline-2 group  outline-gray-200  hover:outline-blue-500 hover:drop-shadow-xl rounded-lg"
       >
         <div className="p-[0.5rem] space-y-2 md:p-[1rem]">
@@ -46,7 +29,7 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
                 src={
                   // uri: checkImageURL(jobDetail?.employer_logo)
                   //   ?
-                  job.job.employer_logo
+                  job.employer_logo
                   // : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
                 }
                 alt=""
@@ -54,10 +37,10 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
               />
               <div className="md:w-[20rem]">
                 <p className="text-gray-500 font-bold font-Poppins text-sm">
-                  {job.job.employer_name}, {job.job.job_country}
+                  {job.employer_name}, {job.job_country}
                 </p>
                 <p className="text-gray-800 font-bold font-Poppins text-sm ">
-                  {job.job.job_title}
+                  {job.job_title}
                 </p>
               </div>
             </div>
@@ -70,8 +53,8 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
                   Salary
                 </p>
                 <p className="text-gray-600 font-bold text-[0.7rem]">
-                  {job.job.job_min_salary !== null
-                    ? `${job.job.job_min_salary}$ - ${job.job.job_max_salary}$ `
+                  {job.job_min_salary !== null
+                    ? `${job.job_min_salary}$ - ${job.job_max_salary}$ `
                     : ""}
                 </p>
               </div>
@@ -81,13 +64,13 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
             <div className="flex items-center space-x-2">
               <MdOutlineBusinessCenter className="text-gray-400 font-bold text-sm h-4 w-4" />
               <p className="text-gray-400 font-bold font-Poppins text-[0.8rem]">
-                {job.job.job_required_experience.experience_mentioned
+                {job.job_required_experience.experience_mentioned
                   ? ` ${
-                      job.job.job_required_experience
+                      job.job_required_experience
                         .required_experience_in_months / 12
                     }  Years experiences, `
                   : " "}
-                {job.job.job_employment_type === "FULLTIME"
+                {job.job_employment_type === "FULLTIME"
                   ? "Full Time"
                   : "Contract"}
               </p>
@@ -96,11 +79,11 @@ const JobCard = (job: { job: JobDetailInter }): JSX.Element => {
           <div className="flex items-center justify-between">
             <div className="w-[13rem] md:w-[20rem]">
               <p className="text-gray-600 font-bold text-sm line-clamp-2 ">
-                {job.job.job_description}
+                {job.job_description}
               </p>
             </div>
             <div>
-              <Link to={job.job.job_apply_link}>
+              <Link to={job.job_apply_link}>
                 <button className="bg-gray-300 text-gray-800 text-[0.8rem] h-[2.5rem] w-[7rem] rounded-lg group-hover:bg-[#403FF2] group-hover:text-white">
                   <span className="font-bold font-Poppins">Apply now</span>
                 </button>
@@ -130,8 +113,8 @@ export const Connection = () => {
     refetch();
   }, [checked]);
 
-      console.log(error)
-   
+  console.log(error);
+
   return (
     <div className="py-[5rem]">
       <div className="text-center space-y-8">
@@ -167,19 +150,19 @@ export const Connection = () => {
                   eachJob.job_employment_type === findJobs
               )
               .slice(0, 6)
-              .map((job) => <JobCard job={job} />)
+              .map((job: JobDetailInter) => <HomeJobCard {...job} />)
           : [1, 2, 3, 4].map((Number) => (
               <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                 <div className="animate-pulse flex space-x-4">
                   <div className="rounded-full bg-slate-200 h-10 w-10"></div>
                   <div className="flex-1 space-y-6 py-1">
-                    <div className="h-2 bg-slate-200 rounded"></div>
+                    <div className="h-2 bg-blue-200 rounded"></div>
                     <div className="space-y-3">
                       <div className="grid grid-cols-3 gap-4">
-                        <div className="h-2 bg-slate-200 rounded col-span-2"></div>
-                        <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+                        <div className="h-2 bg-blue-200 rounded col-span-2"></div>
+                        <div className="h-2 bg-blue-200 rounded col-span-1"></div>
                       </div>
-                      <div className="h-2 bg-slate-200 rounded"></div>
+                      <div className="h-2 bg-blue-200 rounded"></div>
                     </div>
                   </div>
                 </div>
