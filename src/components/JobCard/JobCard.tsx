@@ -79,7 +79,7 @@ const [peopleApplied ,setPeopleApplied] = useState(10)
               <div className="flex items-center gap-3">
                 <RiMoneyDollarCircleLine className="h-6  w-6 text-blue-500" />
                 <p>
-                  ${job.job_min_salary} - ${job.job_max_salary} / Months
+                  ${job.job_min_salary} - ${job.job_max_salary} 
                 </p>
               </div>
             ) : (

@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import { Input, Button, IconButton } from "@material-tailwind/react";
 import { BsBookmark } from "react-icons/bs";
 import { JobCard } from "../../components/JobCard/JobCard";
-import { Profile } from "../../pages/index";
+import { SideProfileCom } from "../../components/SideProfileCom/SideProfileCom";
 import { useFetch } from "../../Hooks/useFetch";
 import { JobDetailInter } from "../../model";
 
@@ -66,12 +66,12 @@ export const Dashboard = () => {
   console.log(data);
 
   return (
-    <div className="grid grid-cols-4 gap-8 py-[3rem]">
+    <div className="grid grid-cols-4 gap-8 py-[3rem] px-3">
       <div>
-        <Profile />
+        <SideProfileCom />
       </div>
       <div className="col-span-2 space-y-8">
-        <div className=" bg-white rounded-xl py-[1rem] px-[2rem] space-y-5">
+        <div className=" bg-white rounded-xl py-[1rem] px-[2rem] space-y-5 hover:shadow-xl">
           <div className="flex items-center justify-between">
             <p className="text-gray-900 font-Poppins font-bold">Search Job </p>
             <div className="w-50">
@@ -121,9 +121,9 @@ export const Dashboard = () => {
             </div>
           </div>
           <div className="w-full h-9 bg-[#c2dff7] rounded-lg">
-            <p className="text-center text-[0.8rem] font-Poppins font-bold py-2">
+            {!isLoading && <p className="text-center text-[0.8rem] font-Poppins font-bold py-2">
               {`${data.length} Jobs Found`}
-            </p>
+            </p>}
           </div>
         </div>
         {!isLoading
