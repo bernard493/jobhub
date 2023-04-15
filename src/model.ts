@@ -1,4 +1,5 @@
 export interface JobDetailInter {
+    job_job_title: string;
     job_city: string;
     job_id: string;
     employer_logo: string;
