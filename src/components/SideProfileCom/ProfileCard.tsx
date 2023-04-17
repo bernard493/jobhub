@@ -5,7 +5,7 @@ import profileIMg from "../../assets/img/pretty-girl-2110243_1920.jpg";
 export const ProfileCard = () => {
   return (
     <div className="bg-white  rounded-xl p-6 flex justify-center hover:shadow-xl">
-      <div className="space-y-4">
+      <div className="space-y-2">
         <div className="flex justify-center">
           <Avatar src={profileIMg} alt="avatar" variant="circular" size="xl" />
         </div>

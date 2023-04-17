@@ -15,7 +15,7 @@ const [peopleApplied ,setPeopleApplied] = useState(10)
   return (
     <div
       key={job.job_id}
-      className="bg-[#fff] p-6 rounded-xl space-y-5 hover:shadow-xl"
+      className="bg-[#fff] px-6 py-3 rounded-xl space-y-3 hover:shadow-xl"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-5">
@@ -33,7 +33,7 @@ const [peopleApplied ,setPeopleApplied] = useState(10)
             <p className="text-gray-800 font-bold font-Poppins text-sm">
               {job.job_title}
             </p>
-            <p className="text-gray-400 font-bold font-Poppins text-sm ">
+            <p className="text-gray-400 font-bold font-Poppins text-[0.7rem] ">
               {job.employer_name}, {job.job_city}
             </p>
           </div>
@@ -50,14 +50,14 @@ const [peopleApplied ,setPeopleApplied] = useState(10)
         </div>
       </div>
       <div>
-        <p className="text-gray-500 font-bold text-sm  line-clamp-2 ">
+        <p className="text-gray-500 font-bold text-[0.8rem]  line-clamp-2 ">
           {job.job_description}
         </p>
       </div>
       <div className="flex items-center gap-4">
         <div className="bg-gray-300 p-3 rounded-lg">
           <p className="text-[0.7rem] text-gray-700 font-bold font-Poppins">
-            {job.job_employment_type === "FULLTIME" ? "Fulltime" : "Contract"}
+            {job.job_employment_type === "FULLTIME" ? "Full time" : "Contract"}
           </p>
         </div>
         <div className="bg-gray-300 p-3 rounded-lg">
