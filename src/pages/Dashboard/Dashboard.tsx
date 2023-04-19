@@ -21,6 +21,12 @@ interface JobSearchInter {
     entry_level: boolean,
     intermediate: boolean,
     expert: boolean,
+    on_site: boolean,
+    fulltime : boolean,
+    remote : boolean,
+    freelance : boolean,
+    part_time : boolean,
+
   }
 }
 
@@ -43,9 +49,17 @@ const initialJobSearch: JobSearchInter = {
     entry_level: false,
     intermediate: false,
     expert: false,
+    on_site : false,
+    remote : false,
+    fulltime : false,
+    freelance : false,
+    part_time : false,
+
   }
 };
 
+
+// handle Job search
 const jobSearchReducer = (jobSearch: JobSearchInter, action: JobSearchAction) => {
   const { type, payload } = action;
   switch (type) {
@@ -89,18 +103,27 @@ export const Dashboard = () => {
    
   };
 
+
+
+  // job search by title
   const handleSearch = ({ target }: any) =>
     dispatch({ type: JobSearchActionKind.JOB_TITTLE, payload: target.value });
+
 
   const handleCountry = ({ target }: any) =>
     dispatch({ type: JobSearchActionKind.JOB_LOCATION, payload: target.value });
 
+
+
+
+
+    //  recall PI for jobs with  jobs input
   const getJobs = () => {
     refetch();
   };
 
   // console.table(jobSearch)
-  console.table(jobSearch.jobFilterValues);
+  // console.table(jobSearch.jobFilterValues);
 
   return (
     <div className="grid grid-cols-4 gap-8 py-[2rem] px-3">
@@ -134,16 +157,7 @@ export const Dashboard = () => {
                   className: "min-w-0",
                 }}
               />
-              <Input
-                type="email"
-                label="Location"
-                value={jobSearch.jobLocation}
-                onChange={handleCountry}
-                className="pr-20"
-                containerProps={{
-                  className: "min-w-0",
-                }}
-              />
+              
             </div>
             <div className="w-57">
               <Button
@@ -167,7 +181,7 @@ export const Dashboard = () => {
         </div>
         {!isLoading
           ? data.map((job: JobDetailInter) => <JobCard {...job} />)
-          : [1, 2, 3, 4, 5, 6, 7, 8].map((Number) => (
+          :  [1, 2, 3, 4, 5, 6, 7, 8].map((Number) => (
               <div className="border border-blue-300 shadow rounded-md p-4 h-[10rem] w-full ">
                 <div className="animate-pulse flex space-x-4">
                   <div className="rounded-full bg-blue-200 h-10 w-10"></div>
@@ -201,10 +215,15 @@ export const Dashboard = () => {
           </div>
           <ExperienceLevel
             handleJobFilterChange={handleJobFilterChange}
-            value={jobSearch.jobFilterValues}
+            jobFilterValues={jobSearch.jobFilterValues}
           />
-          {/* <JobLocation handleChange={handleChange} value={value} setValue={setValue}/>
-      <JobType handleChange={handleChange} value={value} setValue={setValue}/> */}
+          <JobLocation 
+          handleCountry={handleCountry}
+          handleJobFilterChange={handleJobFilterChange} 
+          jobFilterValues={jobSearch.jobFilterValues}
+          jobLocation={jobSearch.jobLocation}
+           />
+      <JobType handleJobFilterChange={handleJobFilterChange} jobFilterValues={jobSearch.jobFilterValues} />
         </div>
       </div>
     </div>

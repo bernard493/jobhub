@@ -10,7 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 
 interface Props {
   handleJobFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: { entry_level: boolean; intermediate: boolean; expert: boolean };
+  jobFilterValues: { entry_level: boolean; intermediate: boolean; expert: boolean };
 }
 
 const BpIcon = styled("span")(({ theme }) => ({
@@ -71,12 +71,12 @@ function BpRadio(props: RadioProps) {
   );
 }
 
-export const ExperienceLevel = ({ value, handleJobFilterChange }: Props) => {
-  const { entry_level, intermediate, expert } = value;
+export const ExperienceLevel = ({ jobFilterValues, handleJobFilterChange }: Props) => {
+  const { entry_level, intermediate, expert } = jobFilterValues;
 
   return (
-    <div className="bg-white  rounded-xl p-4 space-y-4 ">
-      <div className="bg-white  rounded-xl  space-y-4 ">
+    <div className="bg-white  rounded-xl p-4 space-y-2 ">
+      <div className="bg-white  rounded-xl  space-y-2 ">
         <div className="flex justify-between items-center">
           <p className="text-orange-900  font-Poppins font-bold">
             Experience Level
@@ -127,7 +127,7 @@ export const ExperienceLevel = ({ value, handleJobFilterChange }: Props) => {
           </FormControl>
         </div>
         <div>
-          <p className="text-sm text-gray-600 font-Poppins ">2 MOs</p>
+          {/* <p className="text-sm text-gray-600 font-Poppins ">2 MOs</p> */}
         </div>
       </div>
     </div>
