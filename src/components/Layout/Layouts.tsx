@@ -5,7 +5,7 @@ import { NavbarComp } from "../Navbar/NavbarComp";
 
 export const Layouts = () => {
   return (
-    <div className="bg-[#f7f5f5]">
+    <div className=" bg-gray-100">
       <NavbarComp />
       <div className="">
         <Routers />

@@ -1,9 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} */
 
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 
-module.exports = withMT({
+module.exports = {
    content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -24,6 +24,8 @@ module.exports = withMT({
     },
     safelist: ['animate-[fade-in_1s_ease-in-out]', 'animate-[fade-in-down_1s_ease-in-out]']
   },
- plugins: [require("tw-elements/dist/plugin")]
-})
+ plugins: [
+  require('@tailwindcss/forms'),
+]
+}
 
