@@ -44,11 +44,12 @@ export const userSlice = createSlice({
           };
           state.user = loginUser;
           localStorage.setItem("SIGN_UP", JSON.stringify(loginUser));
+          // history.push('/home');  
         }
       }
     },
          // handle lout and routing 
-    logOut: (state, action) => {
+    logOut: (state) => {
       const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
       if (getUserData) {
         const logOutUser = {
