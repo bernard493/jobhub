@@ -15,9 +15,8 @@ const navigation = [
   { name: "Post a Job", href: "/", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
+  { name: "Your Profile", href: "/profile" },
   { name: "Settings", href: "/" },
-  { name: "Sign out", href: "/" },
 ];
 
 function classNames(...classes: string[]) {
@@ -25,15 +24,14 @@ function classNames(...classes: string[]) {
 }
 
 export const NavbarComp = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userName, email, isLoggedIn, imageUrl } = useSelector(allUserState);
   console.log(isLoggedIn);
 
-
-  function handleLogout(){
+  function handleLogout() {
     dispatch(logOut());
-    navigate("/login")
+    navigate("/login");
   }
 
   return (
@@ -45,11 +43,16 @@ export const NavbarComp = () => {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
-                    />
+                    <Link to={"/"} className="flex ">
+                      <img
+                        src="https://flowbite.com/docs/images/logo.svg"
+                        className="h-8 mr-3"
+                        alt="FlowBite Logo"
+                      />
+                      <span className="self-center text-xl text-white font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                        JobHub
+                      </span>
+                    </Link>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
@@ -125,14 +128,14 @@ export const NavbarComp = () => {
                             </Menu.Item>
                           ))}
                           <Menu.Item>
-                            <Button
-                            onClick={handleLogout}
+                            <button
+                              onClick={handleLogout}
                               className={
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                               }
                             >
-                              logout
-                            </Button>
+                              Log out
+                            </button>
                           </Menu.Item>
                         </Menu.Items>
                       </Transition>

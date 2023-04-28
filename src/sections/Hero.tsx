@@ -1,14 +1,6 @@
 import React, { useState, useRef, useReducer, FunctionComponent } from "react";
-import { IoLocationOutline } from "react-icons/io5";
-import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
-import { CiSearch } from "react-icons/ci";
-import heroImg from "../assets/img/startup-4777863_1920.jpg";
-import linkdenicon from "../assets/img/icons8-linkedin-2.gif";
-import instaicon from "../assets/img/icons8-instagram.gif";
-import behanceicon from "../assets/img/icons8-behance-logo-24.png";
-import dribbbleicon from "../assets/img/icons8-dribbble-48.png";
-import teamImg from "../assets/img/team-4200837_1920.jpg";
-import ReactPlayer from "react-player";
+
+import { Input } from "@material-tailwind/react";
 
 interface JobSearchInter {
   jobLocation: string;
@@ -30,6 +22,8 @@ const initialJobSearch: JobSearchInter = {
   jobTittle: "",
 };
 
+
+//later changed to use only one input
 const reducer = (jobSearch: JobSearchInter, action: JobSearchAction) => {
   const { type, payload } = action;
   switch (type) {
@@ -84,128 +78,107 @@ export const Hero: FunctionComponent = () => {
   };
 
   return (
-    <main className="pt-7">
-      <div className="flex flex-col md:grid  md:grid-cols-2 md:gap-[8rem] xl:gap-[15rem]">
-        <div className="pt-[5rem] space-y-7 md:space-y-0">
-          <div className="w-full">
-            <h1 className="text-4xl text-gray-700 text-center  font-bold md:text-5xl">
-              Your dream job is waiting for you.
-            </h1>
-          </div>
-
-          <div className="hidden  items-center py-[3rem] md:block ">
-            <div className="flex  items-center group  cursor-pointer  hover:outline outline-offset-2 outline-2 md:bg-[#fff] w-[27rem]  h-[1rem] py-[1.4rem] text-gray-600    drop-shadow-md dark:text-[#fff]  rounded-lg  md:h-[2.2rem]  md:text-sm ">
-              <div className="flex items-center ">
-                <input
-                  className="relative text-md  h-10  pl-10 outline-none border-none"
-                  placeholder="Find your Location"
-                  type="text"
-                  value={jobSearch.jobLocation}
-                  onChange={handleJobLocation}
-                />
-                <IoLocationOutline className=" absolute text-2xl text-gray-600 h-4 w-4  md:h-4 md:w-4 ml-[1rem]" />
-              </div>
-              <div className="h-6 bg-black w-[0.1rem]" />
-              <div className="flex items-center ">
-                <input
-                  className="relative text-md  h-11  pl-10 outline-none border-none"
-                  placeholder="Job category"
-                  type="text"
-                  value={jobSearch.jobTittle}
-                  onChange={handleJobTittle}
-                />
-                <HiOutlineBuildingOffice2 className=" absolute text-2xl text-gray-600 h-2 w-2  md:h-4 md:w-4 ml-[1rem]" />
-                <div className=" absolute sm:hidden ml-[11rem]  md:block">
-                  <button
-                    onClick={handleJobSearch}
-                    className=" h-[2.3rem] w-[3rem] bg-blue-700  rounded-lg   flex justify-center items-center"
-                  >
-                    <CiSearch className=" text-center font-bold text-2xl text-white h-2 w-2  md:h-5 md:w-5  " />
-                  </button>
+    <>
+      <div className="relative overflow-hidden ">
+        <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
+          <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+            <div className="sm:max-w-lg">
+              <h1 className="font text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                Your dream job is waiting for you
+              </h1>
+              <p className="mt-4 text-xl text-gray-500">
+                Forget the old rules. You can have the best Jobs. Right now.
+                Right here.
+              </p>
+              <div className="w-72 flex space-x-3 py-5">
+                  <Input
+                    onChange={handleJobTittle}
+                    value={jobSearch.jobTittle}
+                    label="Job Tittle"
+                  />
+                 
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className=" flex justify-center py-8 md:hidden">
-            <div className="space-y-4 ">
-              <div className="flex items-center ">
-                <input
-                  className="relative text-md  h-[3rem] text-bold font-Poppins  pl-14 outline outline-offset-2 outline-2 w-[18rem]  rounded-lg border-md"
-                  placeholder="Find your Location"
-                  type="text"
-                  value={jobSearch.jobLocation}
-                  onChange={handleJobLocation}
-                />
-                <IoLocationOutline className=" absolute text-2xl text-gray-600   h-5 w-5 ml-[1rem]" />
-              </div>
-              <div className="flex items-center  ">
-                <input
-                  className="relative text-md h-[3rem]  pl-14 outline outline-offset-2 outline-2 w-[18rem] rounded-lg"
-                  placeholder="Job category"
-                  type="text"
-                  value={jobSearch.jobTittle}
-                  onChange={handleJobTittle}
-                />
-                <HiOutlineBuildingOffice2 className=" absolute text-2xl text-gray-600   h-5 w-5 ml-[1rem]" />
-              </div>
-              <div>
                 <button
                   onClick={handleJobSearch}
-                  className="flex items-center h-[3rem] w-[18rem] bg-blue-700 rounded-lg  justify-center space-x-6 font-bold md:hidden"
+                  className="inline-block rounded-md border border-transparent bg-[#403FF2] px-8 py-2 text-center font-medium text-white hover:bg-indigo-700"
                 >
-                  <span className="font-bold font-Poppins text-white">
-                    Search
-                  </span>
+                  Find Job
                 </button>
+            </div>
+            <div>
+              <div className="mt-10">
+                {/* Decorative image grid */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none  lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl"
+                >
+                  <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                    <div className="flex items-center space-x-6 lg:space-x-8">
+                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
         </div>
-        <div className="w-[20rem] h-[20rem] rounded-full md:pt-[5rem]">
-          <img
-            src={heroImg}
-            alt=""
-            className=" object-cover object-center rounded-3xl md:w-[20rem] md:h-[25rem]"
-          />
-          <div className=" flex justify-center outline outline-offset-6 outline-7 outline-white h-[8rem] w-[14rem] absolute top-[36rem] md:top-[28rem] md:right-[25rem] xl:top-[28rem] xl:right-[35rem] rounded-xl">
-            {/** 
-          * 
-         <ReactPlayer ref={playerRef} url={VIDEO_PATH} controls={true} playing={false} muted={true} width={'100%'} height={'100%'} style={ videoStyle} />
-         */}
-            <img
-              src={teamImg}
-              alt=""
-              className="object-cover object-center rounded-xl w-full "
-            />
-          </div>
-        </div>
       </div>
-      <div className="md:pt-[6rem]">
-        <div className="flex items-center space-x-[7rem] ">
-          <div className="">
-            <div className="space-y-5">
-              <p className="font-bold font-Poppins text-sm">
-                We are trusted by
-              </p>
-              <div className="flex items-center space-x-7">
-                <div className="border-red-400 flex justify-center items-center h-[2rem] w-[2rem] md:h-[2.5rem] md:w-[2.5rem] outline outline-offset-2 outline-2 rounded-lg outline-blue-700">
-                  <img src={linkdenicon} alt="" className="w-6  h-6   " />
-                </div>
-                <div className="border-red-400 flex justify-center items-center h-[2rem] w-[2rem] md:h-[2.5rem] md:w-[2.5rem] outline outline-offset-2 outline-2 rounded-lg outline-black-500">
-                  <img src={instaicon} alt="" className="w-7  h-7   " />
-                </div>
-                <div className="border-red-400 flex justify-center items-center h-[2rem] w-[2rem] md:h-[2.5rem] md:w-[2.5rem] outline outline-offset-2 outline-2 rounded-lg outline-blue-700">
-                  <img src={behanceicon} alt="" className="w-7  h-7   " />
-                </div>
-                <div className="border-red-400 flex justify-center items-center h-[2rem] w-[2rem] md:h-[2.5rem] md:w-[2.5rem] outline outline-offset-2 outline-2 outline-pink-500 rounded-lg">
-                  <img src={dribbbleicon} alt="" className="w-7  h-7   " />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    </>
   );
 };
 

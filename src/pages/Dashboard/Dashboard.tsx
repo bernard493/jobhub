@@ -126,11 +126,11 @@ export const Dashboard = () => {
   // console.table(jobSearch.jobFilterValues);
 
   return (
-    <div className="grid grid-cols-4 gap-8 py-[2rem] px-3">
-      <div>
+    <div className="md:grid md:grid-cols-4 gap-8 py-[2rem] px-3">
+      <div className="hidden md:block">
         <SideProfileCom />
       </div>
-      <div className="col-span-2 space-y-6">
+      <div className="md:col-span-2 space-y-6">
         <div className=" bg-white rounded-xl py-[1rem] px-[2rem] space-y-3 hover:shadow-xl">
           <div className="flex items-center justify-between">
             <p className="text-gray-900 font-Poppins font-bold">Search Job </p>
@@ -199,7 +199,7 @@ export const Dashboard = () => {
               </div>
             ))}
       </div>
-      <div>
+      <div className="hidden md:block">
         <div className="space-y-6 pr-6">
           <div className="bg-white  rounded-xl p-4 space-y-4">
             <div className="flex justify-between items-center">

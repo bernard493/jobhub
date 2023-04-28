@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Login, HomePage, SignUp, Dashboard,JobDetail } from '../pages';
+import { Login, HomePage, SignUp, Dashboard,JobDetail, Profile } from '../pages';
 import { allUserState } from '../features/userSlice';
 import {useSelector} from 'react-redux'
 
@@ -27,7 +27,8 @@ export const Routers= () => {
   console.log(isLoggedIn)
   return (
    <Routes>
-    <Route  path='/' element={!isLoggedIn ? <HomePage/> : <Navigate to="/dashboard"/>}/>
+    <Route  path='/' element={ <HomePage/>}/>
+    <Route  path='/profile' element={isLoggedIn ? <Profile/> : <Navigate to="/login"/>}/>
     <Route  path='/login' element={<Login/>}/>
     <Route  path='/signup' element={<SignUp/>}/>
     <Route  path='/dashboard' element={isLoggedIn ? <Dashboard/> : <Navigate to="/login"/> }  />

@@ -14,20 +14,23 @@ import svg from "../../assets/img/blob.svg";
 export const HomePage = () => {
   return (
     <div>
-      <div className=" hidden absolute -top-[7rem]  -right-[0rem] md:block">
+      {/* <div className=" hidden absolute -top-[7rem]  -right-[9rem] md:block">
         <img src={svg} alt="" className="h-[40rem] w-[40rem] " />
-      </div>
-      <div className=" relative ">
+      </div> */}
+      {/* <div className=" relative "> */}
         
-        <div className=" relative px-6 md:px-[8rem] xl:px-[15rem]">
+        <div className=" relative px-6 md:px-[4rem] xl:px-[rem]">
           <Hero />
           <Talent />
           <Connection />
+        </div>
           <EasySteps />
+          <div className=" relative px-6 md:px-[4rem] xl:px-[rem]">
           <ExcitingJobs />
           <Review />
         </div>
+
       </div>
-    </div>
+    // </div>
   );
 };
