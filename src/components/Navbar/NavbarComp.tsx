@@ -4,8 +4,10 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { allUserState, userSignUp } from "../../features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Badge, Button, Sidebar } from "flowbite-react";
+
 import { logOut } from "../../features/userSlice";
-import { Button } from "@material-tailwind/react";
+// import { Button } from "@material-tailwind/react";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -98,7 +100,7 @@ export const NavbarComp = () => {
                           </Menu.Button>
                         ) : (
                           <Link to="/login">
-                            <Button>Login</Button>
+                            <Button gradientDuoTone="purpleToBlue">Login</Button>
                           </Link>
                         )}
                       </div>
