@@ -32,7 +32,7 @@ export const Routers= () => {
     <Route  path='/login' element={<Login/>}/>
     <Route  path='/signup' element={<SignUp/>}/>
     <Route  path='/dashboard' element={isLoggedIn ? <Dashboard/> : <Navigate to="/login"/> }  />
-    <Route  path='/jobdetails/:id' element={<JobDetail/>}/>
+    <Route  path='/jobdetails/:id' element={ isLoggedIn ?  <JobDetail/>  : <Navigate to="/login"/> } />
    </Routes>
   )
 }

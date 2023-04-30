@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Badge, Button, Sidebar } from "flowbite-react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-
+import { SkillsInputComp } from "../../components/SkillsInputComp/SkillsInputComp";
 import {
   HiChartPie,
   HiViewBoards,
@@ -11,9 +11,23 @@ import {
   HiArrowSmRight,
   HiTable,
 } from "react-icons/hi";
+import { useDispatch,useSelector } from "react-redux";
+import { allUserState, userSignUp } from "../../features/userSlice";
+
+
+
 
 export const Profile = () => {
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const {userName,email,imageUrl} = useSelector(allUserState)
+
+
+
+
+  const handleProfileInforUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }
+
 
   return (
     <>
@@ -111,7 +125,7 @@ export const Profile = () => {
 
       <div className="top-0 p-4 sm:ml-64">
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-          <form>
+          <form onSubmit={(e)=>{handleProfileInforUpdate(e)}}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -131,19 +145,15 @@ export const Profile = () => {
                       Username
                     </label>
                     <div className="mt-2 md:w-[30rem]">
-                      <div className="flex rounded-md shadow-sm space-x-2 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                        <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                          jobhun.com/
-                        </span>
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          autoComplete="username"
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          placeholder="janesmith"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        value={userName}
+                        name="username"
+                        id="username"
+                        autoComplete="username"
+                        className="block flex-1 w-full border-0 rounded-md py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                        placeholder="Username"
+                      />
                     </div>
                   </div>
 
@@ -181,15 +191,36 @@ export const Profile = () => {
                           name="Job_title"
                           id="Job_title"
                           autoComplete="Job_title"
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                          className="block flex-1 w-full border-0 rounded-md py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="Frontend Developer"
                         />
                       </div>
                     </div>
                   </div>
+                  <div className="sm:col-span-4 md:flex items-center md:gap-[15rem]">
+                    <label
+                      htmlFor="username"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Skills
+                    </label>
+                    <div className="mt-2 md:w-[30rem]">
+                      <label
+                        htmlFor="default-search"
+                        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                      >
+                        Search
+                      </label>
+                      <div className="relative">
+                       
+                       
+                       <SkillsInputComp/> 
+                      </div>
+                    
+                    </div>
+                  </div>
 
                   <div className="col-span-full md:flex items-center md:gap-[12rem]">
-                   
                     <label
                       htmlFor="photo"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -198,8 +229,8 @@ export const Profile = () => {
                     </label>
                     <div className="mt-2 flex items-center gap-x-8">
                       <img
-                        className="h-8 w-8 rounded-full"
-                        src={"imageUrl"}
+                        className="h-[4rem] w-[4rem] rounded-full"
+                        src={imageUrl}
                         alt="profile_Image"
                       />
                       <button
@@ -210,7 +241,6 @@ export const Profile = () => {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -269,6 +299,7 @@ export const Profile = () => {
                     <div className="mt-2">
                       <input
                         id="email"
+                        value={email}
                         name="email"
                         type="email"
                         autoComplete="email"
@@ -371,9 +402,7 @@ export const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="border-b border-gray-900/10 pb-12">
-               
-              </div>
+              <div className="border-b border-gray-900/10 pb-12"></div>
 
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">

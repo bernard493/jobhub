@@ -6,10 +6,28 @@ import { useSelector, useDispatch } from "react-redux";
 interface UserState {
   user: {
     userName: string;
+    firstName: string;
+    lastName : string;
     email: string;
+    bio :string;
+    job_title : string;
     imageUrl: string;
     password: string;
     isLoggedIn: boolean;
+    skills : string[]
+    address : {
+         country : string;
+         street_address : string;
+         city:string;
+         state : string;
+         zip_code : string;
+    }
+    email_notification : {
+         new_jobs : boolean;
+         offers : boolean;
+
+    }
+    push_notification : boolean
   };
 }
 const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
