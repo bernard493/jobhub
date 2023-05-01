@@ -1,40 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
-
+import {UserStateInterface} from '../model'
 // Define a type for the slice state
-interface UserState {
-  user: {
-    userName: string;
-    firstName: string;
-    lastName : string;
-    email: string;
-    bio :string;
-    job_title : string;
-    imageUrl: string;
-    password: string;
-    isLoggedIn: boolean;
-    skills : string[]
-    address : {
-         country : string;
-         street_address : string;
-         city:string;
-         state : string;
-         zip_code : string;
-    }
-    email_notification : {
-         new_jobs : boolean;
-         offers : boolean;
 
-    }
-    push_notification : boolean
-  };
-}
 const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
 
-const initialState: UserState = {
+const initialState: UserStateInterface = {
   user: {
     ...getUserData,
+    firstName: "" ,
+    lastName : "" ,
+    bio :"" ,
+    job_title : "" ,
+    skills : [''] ,
+    address : {
+         country : "Ghana" ,
+         street_address : "" ,
+         city:"" ,
+         state : "" ,
+         zip_code : "" ,
+    },
+    
   },
 };
 
@@ -66,7 +53,7 @@ export const userSlice = createSlice({
         }
       }
     },
-         // handle lout and routing 
+         // handle logout and routing 
     logOut: (state) => {
       const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
       if (getUserData) {
@@ -78,9 +65,13 @@ export const userSlice = createSlice({
         localStorage.setItem("SIGN_UP", JSON.stringify(logOutUser));
       }
     },
+
+    userProfileUpdate : (state ,action) => {
+
+    }
   },
 });
 
 export const allUserState = (state: RootState) => state.user.user;
-export const { userSignUp, userLogin, logOut } = userSlice.actions;
+export const { userSignUp, userLogin, logOut ,userProfileUpdate } = userSlice.actions;
 export default userSlice.reducer;

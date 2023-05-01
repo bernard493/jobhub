@@ -17,3 +17,50 @@ export interface JobDetailInter {
     job_is_remote: boolean;
     job_employment_type: string;
   }
+
+
+ export interface UserStateInterface {
+    user: {
+      userName: string;
+      firstName: string;
+      lastName : string;
+      email: string;
+      bio :string;
+      job_title : string;
+      imageUrl: string;
+      password: string;
+      isLoggedIn: boolean;
+      skills : string[]
+      address : {
+           country : string;
+           street_address : string;
+           city:string;
+           state : string;
+           zip_code : string;
+      }
+      
+    };
+  }
+
+
+  export interface UserFormInterface {
+    
+      userName: string;
+      firstName: string;
+      lastName : string;
+      email: string;
+      bio :string;
+      job_title : string;
+      imageUrl: string;
+      password?: string;
+      skills : string[]
+      address : {
+           country : string;
+           street_address : string;
+           city:string;
+           state : string;
+           zip_code : string;
+      }
+      
+   
+  }
