@@ -3,7 +3,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 
-export const SkillsInputComp = () => {
+
+type Props ={
+  edit : boolean
+}
+export const SkillsInputComp = ( edit : Props) => {
   const [skills,setSkills ] = useState('')
 
 
@@ -18,7 +22,7 @@ export const SkillsInputComp = () => {
       getOptionLabel={(option) => option.title}
       defaultValue={[top100Films[13], top100Films[12], top100Films[11]]}
       renderInput={(params) => (
-        <TextField {...params} label="Skills" placeholder="Add Skills" />
+        <TextField {...params} label="Skills" placeholder="Add Skills" disabled={true} />
       )}
       sx={{ width: '320px' }}
     />

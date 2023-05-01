@@ -17,6 +17,7 @@ import { allUserState, userProfileUpdate } from "../../features/userSlice";
 import { UserFormInterface } from "../../model";
 
 export const Profile = () => {
+  const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const {
     userName,
@@ -42,9 +43,7 @@ export const Profile = () => {
     skills: [],
   };
 
-  const handleProfileInforUpdate = () => {
-  };
-
+  const handleProfileInforUpdate = () => {};
 
   const formik = useFormik({
     initialValues: initialValue,
@@ -52,7 +51,6 @@ export const Profile = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-
 
   return (
     <>
@@ -153,13 +151,25 @@ export const Profile = () => {
           <form onSubmit={formik.handleSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">
-                  Profile
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  This information will be displayed publicly so be careful what
-                  you share.
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-base font-semibold leading-7 text-gray-900">
+                      Profile
+                    </h2>
+                    <p className="mt-1 text-sm leading-6 text-gray-600">
+                      This information will be displayed publicly so be careful
+                      what you share.
+                    </p>
+                  </div>
+                  <div>
+                    <Button
+                      gradientDuoTone="purpleToBlue"
+                      onClick={() => setEdit(true)}
+                    >
+                      Edit Profile
+                    </Button>
+                  </div>
+                </div>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-4 md:flex items-center md:gap-[13rem]">
@@ -174,8 +184,10 @@ export const Profile = () => {
                         type="text"
                         name="username"
                         id="username"
+                        //
                         onChange={formik.handleChange}
-                        value={formik.values.userName}
+                        value={edit ? formik.values.userName : userName}
+                        disabled={!edit}
                         autoComplete="username"
                         className="block flex-1 w-full border-0 rounded-md py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                         placeholder="Username"
@@ -195,7 +207,8 @@ export const Profile = () => {
                         id="bio"
                         name="bio"
                         onChange={formik.handleChange}
-                        value={formik.values.bio}
+                        value={edit ? formik.values.bio : bio}
+                        disabled={!edit}
                         rows={3}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         defaultValue={""}
@@ -218,6 +231,9 @@ export const Profile = () => {
                           type="text"
                           name="Job_title"
                           id="Job_title"
+                          onChange={formik.handleChange}
+                          value={edit ? formik.values.job_title :job_title}
+                          disabled={!edit}
                           autoComplete="Job_title"
                           className="block flex-1 w-full border-0 rounded-md py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="Frontend Developer"
@@ -240,7 +256,7 @@ export const Profile = () => {
                         Search
                       </label>
                       <div className="relative">
-                        <SkillsInputComp />
+                        <SkillsInputComp edit={edit} />
                       </div>
                     </div>
                   </div>
@@ -291,7 +307,8 @@ export const Profile = () => {
                         name="firstName"
                         id="firstName"
                         onChange={formik.handleChange}
-                        value={formik.values.firstName}
+                        value={edit ? formik.values.firstName : firstName}
+                        disabled={!edit}
                         autoComplete="given-name"
                         className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -311,7 +328,8 @@ export const Profile = () => {
                         name="lastName"
                         id="lastName"
                         onChange={formik.handleChange}
-                        value={formik.values.lastName}
+                        value={edit ? formik.values.lastName : lastName}
+                        disabled={!edit}
                         autoComplete="family-name"
                         className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -330,7 +348,8 @@ export const Profile = () => {
                         id="email"
                         name="email"
                         onChange={formik.handleChange}
-                        value={formik.values.email}                        
+                        value={edit ? formik.values.email : email}
+                        disabled={!edit}
                         type="email"
                         autoComplete="email"
                         className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -350,7 +369,8 @@ export const Profile = () => {
                         id="country"
                         name="country"
                         onChange={formik.handleChange}
-                        value={formik.values.address.country}
+                        value={edit ? formik.values.address.country : country}
+                        disabled={!edit}
                         autoComplete="country-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                       >
@@ -394,7 +414,8 @@ export const Profile = () => {
                         name="city"
                         id="city"
                         onChange={formik.handleChange}
-                        value={formik.values.address.city}
+                        value={edit ? formik.values.address.city : city}
+                        disabled={!edit}
                         autoComplete="address-level2"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -413,7 +434,8 @@ export const Profile = () => {
                         type="text"
                         name="state"
                         onChange={formik.handleChange}
-                        value={formik.values.address.state}
+                        value={edit ? formik.values.address.state : state}
+                        disabled={!edit}
                         id="state"
                         autoComplete="address-level1"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -434,7 +456,8 @@ export const Profile = () => {
                         name="zip_code"
                         id="zip_code"
                         onChange={formik.handleChange}
-                        value={formik.values.address.zip_code}
+                        value={edit ? formik.values.address.zip_code : zip_code}
+                        disabled={!edit}
                         autoComplete="postal-code"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -442,7 +465,6 @@ export const Profile = () => {
                   </div>
                 </div>
               </div>
-              
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
