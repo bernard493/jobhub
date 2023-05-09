@@ -3,24 +3,22 @@ import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { Badge, Button, Sidebar } from "flowbite-react";
 import { DetailsUpdate } from "./DetailsUpdate";
 
-
-
-
 export const ProfileDetails = () => {
   const [edit, setEdit] = useState(false);
 
   return (
     <>
     {
-      !edit ?
-    <div>
+      !edit ? 
+  
+    <div className="px-7 pt-10">
       <div className="px-4 flex items-center justify-between sm:px-0 ">
         <div>
           <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Applicant Information
+            Profile Information
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            Personal details and application.
+            Personal details
           </p>
         </div>
         <div>
@@ -135,8 +133,8 @@ export const ProfileDetails = () => {
       </div>
     </div>
     :
-    <DetailsUpdate setEdit={setEdit}/>
-    }
-    </>
+    <DetailsUpdate/>
+}
+</>
   );
 };

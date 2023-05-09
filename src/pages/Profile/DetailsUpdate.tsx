@@ -8,13 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { allUserState, userProfileUpdate } from "../../features/userSlice";
 import { UserFormInterface } from "../../model";
 
-
 interface Props {
   // setEdit : ():void
 }
 
-
-export const DetailsUpdate = (setEdit : any ) => {
+export const DetailsUpdate = (setEdit: any) => {
   const dispatch = useDispatch();
   const {
     userName,
@@ -46,32 +44,47 @@ export const DetailsUpdate = (setEdit : any ) => {
     initialValues: initialValue,
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
-      setEdit(false)
+      setEdit(false);
     },
   });
 
   return (
     <>
-     
-      
-
       <div className=" p-4 ">
         <div className="">
           <form onSubmit={formik.handleSubmit}>
             <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
-               
-                  <div>
-                    <h2 className="text-base font-semibold leading-7 text-gray-900">
-                      Profile
-                    </h2>
-                    <p className="mt-1 text-sm leading-6 text-gray-600">
-                      This information will be displayed publicly so be careful
-                      what you share.
-                    </p>
+              <div className="border-b border-gray-900/10 pb-12 space-y-4">
+                <div>
+                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    Update Profile
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                    This information will be displayed publicly so be careful
+                    what you share.
+                  </p>
+                </div>
+                <div className="col-span-full md:flex items-center md:gap-[12rem]">
+                  <label
+                    htmlFor="photo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Profile Photo
+                  </label>
+                  <div className="mt-2 flex items-center gap-x-8">
+                    <img
+                      className="h-[4rem] w-[4rem] rounded-full"
+                      src={imageUrl}
+                      alt="profile_Image"
+                    />
+                    <button
+                      type="button"
+                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      Change
+                    </button>
                   </div>
-                  
-               
+                </div>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-4 md:flex items-center md:gap-[13rem]">
@@ -92,6 +105,22 @@ export const DetailsUpdate = (setEdit : any ) => {
                         autoComplete="username"
                         className="block flex-1 w-full border-0 rounded-md py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                         placeholder="Username"
+                      />
+                    </div>
+                  </div>
+                  <div className="sm:col-span-4 md:flex items-center md:gap-[13rem]">
+                    <label htmlFor="email-address" className="sr-only">
+                      Email address
+                    </label>
+                    <div className="mt-2 md:w-[30rem]">
+                      <input
+                        id="email-address"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                        placeholder="Enter your email"
                       />
                     </div>
                   </div>
@@ -133,7 +162,7 @@ export const DetailsUpdate = (setEdit : any ) => {
                           id="Job_title"
                           onChange={formik.handleChange}
                           value={job_title}
-                            autoComplete="Job_title"
+                          autoComplete="Job_title"
                           className="block flex-1 w-full border-0 rounded-md py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="Frontend Developer"
                         />
@@ -157,202 +186,6 @@ export const DetailsUpdate = (setEdit : any ) => {
                       <div className="relative">
                         <SkillsInputComp edit={true} />
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="col-span-full md:flex items-center md:gap-[12rem]">
-                    <label
-                      htmlFor="photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Profile Photo
-                    </label>
-                    <div className="mt-2 flex items-center gap-x-8">
-                      <img
-                        className="h-[4rem] w-[4rem] rounded-full"
-                        src={imageUrl}
-                        alt="profile_Image"
-                      />
-                      <button
-                        type="button"
-                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      >
-                        Change
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">
-                  Personal Information
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Use a permanent address where you can receive mail.
-                </p>
-
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      First name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        onChange={formik.handleChange}
-                        value={firstName}
-                        autoComplete="given-name"
-                        className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Last name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        onChange={formik.handleChange}
-                        value={lastName}
-                        autoComplete="family-name"
-                        className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Email address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        name="email"
-                        onChange={formik.handleChange}
-                        value={ email}
-                        type="email"
-                        autoComplete="email"
-                        className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Country
-                    </label>
-                    <div className="mt-2">
-                      <select
-                        id="country"
-                        name="country"
-                        onChange={formik.handleChange}
-                        value={country}
-                        autoComplete="country-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="street-address"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Street address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="street_address"
-                        id="street_address"
-                        onChange={formik.handleChange}
-                        value={formik.values.address.street_address}
-                        autoComplete="street-address"
-                        className="block w-full md:w-[25rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2 sm:col-start-1">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      City
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        onChange={formik.handleChange}
-                        value={ city}
-                        autoComplete="address-level2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="region"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      State / Province
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="state"
-                        onChange={formik.handleChange}
-                        value={state}
-                        id="state"
-                        autoComplete="address-level1"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="postal-code"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      ZIP / Postal code
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="zip_code"
-                        id="zip_code"
-                        onChange={formik.handleChange}
-                        value={zip_code}
-                        autoComplete="postal-code"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
                     </div>
                   </div>
                 </div>

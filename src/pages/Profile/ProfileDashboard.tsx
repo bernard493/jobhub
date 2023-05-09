@@ -2,7 +2,8 @@ import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Menu, Tab, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ProfileSideBar } from "./ProfileSideBar";
-import { RxDashboard } from "react-icons/rx";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { FiUsers, FiSettings } from "react-icons/fi";
 import { ProfileDetails } from "./ProfileDetails";
 
 function classNames(...classes: string[]) {
@@ -13,10 +14,9 @@ export const ProfileDashboard = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   let [categories] = useState([
-    { title: "Dashboard", icon: <RxDashboard /> },
-    { title: "Profile", icon: <RxDashboard /> },
-    { title: "Security", icon: <RxDashboard /> },
-    { title: "Plan", icon: <RxDashboard /> },
+    { title: "Dashboard", icon: <AiOutlineDashboard /> },
+    { title: "Profile", icon: <FiUsers /> },
+    { title: "Settings", icon: <FiSettings /> },
   ]);
 
   return (
@@ -99,10 +99,11 @@ export const ProfileDashboard = () => {
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-2 mt-7">
+          <section aria-labelledby="products-heading" className="pb-2 ">
             <Tab.Group>
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                <div className="hidden  lg:block">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+                <div className="hidden  lg:block  pt-8 ">
+                  <p className="text-md text-gray-700 pl-5 pb-2 ">Menu</p>
                   <Tab.List className="p-1">
                     {categories.map((category) => (
                       <Tab
@@ -110,22 +111,21 @@ export const ProfileDashboard = () => {
                         className={({ selected }) =>
                           classNames(
                             "w-full flex items-center space-x-5 rounded-md py-2.5 pl-10 text-base font-bold leading-5 text-gray-700",
-                            "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                            "ring-white ring-opacity-60 ring-offset-2  focus:outline-none focus:ring-2",
                             selected
                               ? "bg-gray-100 "
                               : "text-blue-100 hover:bg-white/[0.12] hover:text-gray-300"
                           )
                         }
                       >
-                        {category.icon}
-                        <p>{category.title}</p>
+                        <p className="text-lg">{category.icon}</p>
+                        <p className="">{category.title}</p>
                       </Tab>
                     ))}
                   </Tab.List>
                 </div>
-                <div className="lg:col-span-3">
+                <div className="lg:col-span-4">
                   <Tab.Panels>
-                  
                     <Tab.Panel>
                       <div className="sm:p-4">
                         <div className="grid grid-cols-3 gap-4 mb-4">
@@ -201,9 +201,9 @@ export const ProfileDashboard = () => {
                         </div>
                       </div>
                     </Tab.Panel>
-                   
+
                     <Tab.Panel>
-                     <ProfileDetails/>
+                      <ProfileDetails />
                     </Tab.Panel>
                   </Tab.Panels>
                 </div>
