@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { userLogin } from "../../features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin, allUserState } from "../../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const { isLoggedIn } = useSelector(allUserState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (email && password) {
       dispatch(userLogin({ email, password }));
     }
   };
+
+  console.log(isLoggedIn)
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn]);
 
   return (
     <>

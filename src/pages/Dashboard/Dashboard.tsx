@@ -1,230 +1,225 @@
-import React, { useState, useReducer } from "react";
-import { Input, Button, IconButton } from "@material-tailwind/react";
-import { BsBookmark } from "react-icons/bs";
-import { JobCard } from "../../components/JobCard/JobCard";
-import { SideProfileCom } from "../../components/SideProfileCom/SideProfileCom";
-import { useFetch } from "../../Hooks/useFetch";
-import { JobDetailInter } from "../../model";
-// import { SideFilterCom } from "../../components/SideFilterCom/SideFilterCom";
-import { ExperienceLevel } from "../../components/SideFilterCom/ExperienceLevel";
-import { JobLocation } from "../../components/SideFilterCom/JobLocation";
-import { JobType } from "../../components/SideFilterCom/JobType";
+import { Fragment, useState } from "react";
+import { Dialog, Disclosure, Menu, Tab, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { SideBar } from "../../components/Sidebar/SideBar";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { FiUsers, FiSettings } from "react-icons/fi";
+import { ProfileDetails } from "./ProfileDetails";
 
-
-
-
-
-interface JobSearchInter {
-  jobLocation: string;
-  jobTittle: string;
-  jobFilterValues: { 
-    entry_level: boolean,
-    intermediate: boolean,
-    expert: boolean,
-    on_site: boolean,
-    fulltime : boolean,
-    remote : boolean,
-    freelance : boolean,
-    part_time : boolean,
-
-  }
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
-
-enum JobSearchActionKind {
-  JOB_LOCATION = "JOB_LOCATION",
-  JOB_TITTLE = "JOB_TITTLE",
-  // JOB_FILTER = "JOB_FILTER"
-}
-
-interface JobSearchAction {
-  type: JobSearchActionKind;
-  payload: string 
-  // | boolean
-}
-
-const initialJobSearch: JobSearchInter = {
-  jobTittle: "Software Engineer",
-  jobLocation: "london",
-  jobFilterValues : {
-    entry_level: false,
-    intermediate: false,
-    expert: false,
-    on_site : false,
-    remote : false,
-    fulltime : false,
-    freelance : false,
-    part_time : false,
-
-  }
-};
-
-
-// handle Job search
-const jobSearchReducer = (jobSearch: JobSearchInter, action: JobSearchAction) => {
-  const { type, payload } = action;
-  switch (type) {
-    case JobSearchActionKind.JOB_LOCATION:
-      return {
-        ...jobSearch,
-        jobLocation: payload,
-      };
-
-    case JobSearchActionKind.JOB_TITTLE:
-      return {
-        ...jobSearch,
-        jobTittle: payload,
-      };
-
-    //  case JobSearchActionKind.JOB_FILTER:
-    //   return {
-    //     ...jobSearch,
-    //     jobFilterValues : {
-         
-    //     }
-    //   } 
-  }
-};
 
 export const Dashboard = () => {
-  // const [search, setSearch] = useState("");
-  // const [country, setCountry] = useState("");
-  const [jobSearch, dispatch] = useReducer(jobSearchReducer, initialJobSearch);
-  const { data, isLoading, error, refetch } = useFetch("search", {
-    query: ` ${jobSearch.jobTittle} , ${jobSearch.jobLocation}`,
-    num_pages: "5",
-  });
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(1);
 
+  console.log(selectedIndex);
 
-
-  const handleJobFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const value = (event.target as HTMLInputElement).value;
-    // {[event.target.name: event.target.checked]}
-    // dispatch({ type: JobSearchActionKind.JOB_FILTER, payload:{[event.target.name]: event.target.checked }});
-   
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedIndex(newValue);
+    console.log(newValue);
   };
-
-
-
-  // job search by title
-  const handleSearch = ({ target }: any) =>
-    dispatch({ type: JobSearchActionKind.JOB_TITTLE, payload: target.value });
-
-
-  const handleCountry = ({ target }: any) =>
-    dispatch({ type: JobSearchActionKind.JOB_LOCATION, payload: target.value });
-
-
-
-
-
-    //  recall PI for jobs with  jobs input
-  const getJobs = () => {
-    refetch();
-  };
-
-  // console.table(jobSearch)
-  // console.table(jobSearch.jobFilterValues);
 
   return (
-    <div className="md:grid md:grid-cols-4 gap-8 py-[2rem] px-3">
-      <div className="hidden md:block">
-        <SideProfileCom />
-      </div>
-      <div className="md:col-span-2 space-y-6">
-        <div className=" bg-white rounded-xl py-[1rem] px-[2rem] space-y-3 hover:shadow-xl">
-          <div className="flex items-center justify-between">
-            <p className="text-gray-900 font-Poppins font-bold">Search Job </p>
-            <div className="w-50">
-              <Button
-                variant="outlined"
-                color="blue"
-                className="flex items-center gap-2"
+    <div className="bg-white">
+      <div>
+        {/* Mobile filter dialog */}
+        <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+          <Dialog
+            as="div"
+            className="relative z-40 lg:hidden"
+            onClose={setMobileFiltersOpen}
+          >
+            <Transition.Child
+              as={Fragment}
+              enter="transition-opacity ease-linear duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition-opacity ease-linear duration-300"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-black bg-opacity-25" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 z-40 flex">
+              <Transition.Child
+                as={Fragment}
+                enter="transition ease-in-out duration-300 transform"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transition ease-in-out duration-300 transform"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
               >
-                <BsBookmark className="text-gray-400 font-bold text-sm h-4 w-4" />
-                <span>Save Search</span>
-              </Button>
-            </div>
-          </div>
-          <div className=" flex items-center gap-5">
-            <div className="relative flex w-full max-w-[31rem] gap-3">
-              <Input
-                type="email"
-                label="Search Job"
-                value={jobSearch.jobTittle}
-                onChange={handleSearch}
-                className="pr-20"
-                containerProps={{
-                  className: "min-w-0",
-                }}
-              />
-              
-            </div>
-            <div className="w-57">
-              <Button
-                onClick={getJobs}
-                variant="outlined"
-                color={jobSearch.jobTittle ? "blue" : "blue-gray"}
-                disabled={!jobSearch.jobTittle}
-                className="flex items-center gap-2"
-              >
-                <span> Search</span>
-              </Button>
-            </div>
-          </div>
-          <div className="w-full h-9 bg-[#c2dff7] rounded-lg">
-            {!isLoading && (
-              <p className="text-center text-[0.7rem] font-Poppins font-bold py-2">
-                {`${data.length} Jobs Found`}
-              </p>
-            )}
-          </div>
-        </div>
-        {!isLoading
-          ? data.map((job: JobDetailInter) => <JobCard {...job} />)
-          :  [1, 2, 3, 4, 5, 6, 7, 8].map((Number) => (
-              <div className="border border-blue-300 shadow rounded-md p-4 h-[10rem] w-full ">
-                <div className="animate-pulse flex space-x-4">
-                  <div className="rounded-full bg-blue-200 h-10 w-10"></div>
-                  <div className="flex-1 space-y-9 py-1">
-                    <div className="h-4 bg-blue-200 rounded"></div>
-                    <div className="space-y-9">
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="h-4 bg-blue-200 rounded col-span-2"></div>
-                        <div className="h-4 bg-blue-200 rounded col-span-1"></div>
-                      </div>
-                      <div className="h-4 bg-blue-200 rounded"></div>
-                    </div>
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                  <div className="flex items-center justify-between px-4">
+                    <button
+                      type="button"
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                      onClick={() => setMobileFiltersOpen(false)}
+                    >
+                      <span className="sr-only">Close menu</span>
+                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
                   </div>
-                </div>
-              </div>
-            ))}
-      </div>
-      <div className="hidden md:block">
-        <div className="space-y-6 pr-6">
-          <div className="bg-white  rounded-xl p-4 space-y-4">
-            <div className="flex justify-between items-center">
-              <p className="text-gray-900 text-lg font-Poppins font-bold">
-                Job Filter
-              </p>
-              <button className=" bg-gray-100 hover:bg-gray-300 h-[2.4rem] w-[6rem] rounded-full flex justify-center items-center">
-                <span className="text-blue-700 text-md font-Poppins">
-                  Clear all
-                </span>
+
+                  <SideBar />
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </Dialog>
+        </Transition.Root>
+
+        <main className=" ">
+          <div className="flex items-baseline justify-between  border-gray-200 ">
+            <div className="flex items-center">
+              <button
+                data-drawer-target="default-sidebar"
+                data-drawer-toggle="default-sidebar"
+                aria-controls="default-sidebar"
+                onClick={() => setMobileFiltersOpen(true)}
+                type="button"
+                className="inline-flex items-center p-2 m-2 ml-3 text-sm text-gray-500 border rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              >
+                <span className="sr-only">Open sidebar</span>
+                <svg
+                  className="w-6 h-6"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                  ></path>
+                </svg>
               </button>
             </div>
           </div>
-          <ExperienceLevel
-            handleJobFilterChange={handleJobFilterChange}
-            jobFilterValues={jobSearch.jobFilterValues}
-          />
-          <JobLocation 
-          handleCountry={handleCountry}
-          handleJobFilterChange={handleJobFilterChange} 
-          jobFilterValues={jobSearch.jobFilterValues}
-          jobLocation={jobSearch.jobLocation}
-           />
-      <JobType handleJobFilterChange={handleJobFilterChange} jobFilterValues={jobSearch.jobFilterValues} />
-        </div>
+
+          <section aria-labelledby="products-heading" className="pb-2 ">
+            <Tab.Group
+              selectedIndex={selectedIndex}
+              onChange={setSelectedIndex}
+            >
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+                {/* <div className="hidden  lg:block  pt-8 ">
+                  <p className="text-md text-gray-700 pl-5 pb-2 ">Menu</p>
+                  <Tab.List className="p-1">
+                    {categories.map((category) => (
+                      <Tab
+                        key={category.title}
+                        className={({ selected }) =>
+                          classNames(
+                            "w-full flex items-center space-x-5 rounded-md py-2.5 pl-10 text-base font-bold leading-5 text-gray-700",
+                            "ring-white ring-opacity-60 ring-offset-2  focus:outline-none focus:ring-2",
+                            selected
+                              ? "bg-gray-100 "
+                              : "text-blue-100 hover:bg-white/[0.12] hover:text-gray-300"
+                          )
+                        }
+                      >
+                        <p className="text-lg">{category.icon}</p>
+                        <p className="">{category.title}</p>
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                </div> */}
+                <SideBar
+                  selectedIndex={selectedIndex}
+                  onChange={handleChange}
+                />
+                <div className="lg:col-span-4">
+                  <Tab.Panels>
+                    <Tab.Panel>
+                      <div className="sm:p-4">
+                        <div className="grid grid-cols-3 gap-4 mb-4">
+                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                          <p className="text-2xl text-gray-400 dark:text-gray-500">
+                            +
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                          <p className="text-2xl text-gray-400 dark:text-gray-500">
+                            +
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                            <p className="text-2xl text-gray-400 dark:text-gray-500">
+                              +
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Tab.Panel>
+
+                    <Tab.Panel>
+                      <ProfileDetails />
+                    </Tab.Panel>
+                  </Tab.Panels>
+                </div>
+              </div>
+            </Tab.Group>
+          </section>
+        </main>
       </div>
     </div>
   );

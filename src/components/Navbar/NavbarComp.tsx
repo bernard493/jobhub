@@ -29,7 +29,6 @@ export const NavbarComp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userName, email, isLoggedIn, imageUrl } = useSelector(allUserState);
-  console.log(isLoggedIn);
 
   function handleLogout() {
     dispatch(logOut());

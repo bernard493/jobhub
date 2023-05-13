@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
-import {UserStateInterface} from '../model'
+import { UserStateInterface } from "../model";
 // Define a type for the slice state
 
 const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
@@ -9,18 +9,6 @@ const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
 const initialState: UserStateInterface = {
   user: {
     ...getUserData,
-    firstName: "" ,
-    lastName : "" ,
-    bio :"" ,
-    job_title : "" ,
-    skills : [''] ,
-    address : {
-         country : "Ghana" ,
-         street_address : "" ,
-         city:"" ,
-         state : "" ,
-         zip_code : "" ,
-    },
     
   },
 };
@@ -49,11 +37,10 @@ export const userSlice = createSlice({
           };
           state.user = loginUser;
           localStorage.setItem("SIGN_UP", JSON.stringify(loginUser));
-          // history.push('/home');  
         }
       }
     },
-         // handle logout and routing 
+    // handle logout and routing
     logOut: (state) => {
       const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
       if (getUserData) {
@@ -66,12 +53,23 @@ export const userSlice = createSlice({
       }
     },
 
-    userProfileUpdate : (state ,action) => {
-
-    }
+    userProfileUpdate: (state, action) => {
+      const { userName, email, imageUrl, bio, job_title, skills } =
+        action.payload;
+      const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
+      if (getUserData) {
+        const newProfileInfor = {
+          ...getUserData,
+          ...action.payload,
+        };
+        // console.table(newProfileInfor)
+         localStorage.setItem("SIGN_UP", JSON.stringify(newProfileInfor));
+      }
+    },
   },
 });
 
 export const allUserState = (state: RootState) => state.user.user;
-export const { userSignUp, userLogin, logOut ,userProfileUpdate } = userSlice.actions;
+export const { userSignUp, userLogin, logOut, userProfileUpdate } =
+  userSlice.actions;
 export default userSlice.reducer;

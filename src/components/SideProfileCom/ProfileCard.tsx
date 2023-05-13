@@ -5,7 +5,7 @@ import { allUserState } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 
 export const ProfileCard = () => {
-  const {userName,imageUrl} = useSelector(allUserState)
+  const {userName,imageUrl ,job_title} = useSelector(allUserState)
   return (
     <div className="bg-white  rounded-xl p-6 flex justify-center hover:shadow-xl">
       <div className="space-y-2">
@@ -14,7 +14,7 @@ export const ProfileCard = () => {
         </div>
         <div className="text-center space-y-2">
           <p className="text-gray-900 text-base font-bold font-Poppins">{userName}</p>
-          <p className="text-gray-600 text-sm font-Poppins">Junior React Developer</p>
+          <p className="text-gray-600 text-sm font-Poppins">{job_title}</p>
         </div>
         <div className="flex justify-center">
           <button

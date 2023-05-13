@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Badge, Button, Sidebar } from "flowbite-react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { SkillsInputComp } from "../../components/SkillsInputComp/SkillsInputComp";
-import { ProfileSideBar } from "./ProfileSideBar";
-import { useFormik } from "formik";
+import { SideBar } from "../../components/Sidebar/SideBar";
+import { Formik, useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { allUserState, userProfileUpdate } from "../../features/userSlice";
 import { UserFormInterface } from "../../model";
+import {useNavigate } from "react-router-dom";
 
 interface Props {
   // setEdit : ():void
@@ -14,43 +15,33 @@ interface Props {
 
 export const DetailsUpdate = (setEdit: any) => {
   const dispatch = useDispatch();
-  const {
-    userName,
-    email,
-    imageUrl,
-    bio,
-    job_title,
-    skills,
-    lastName,
-    firstName,
-    address: { country, street_address, city, state, zip_code },
-  } = useSelector(allUserState);
+  const navigate = useNavigate()
+  const { userName, email, imageUrl, bio, job_title } =
+    useSelector(allUserState);
 
   const initialValue: UserFormInterface = {
-    userName: "",
-    email: "",
-    imageUrl: "",
-    bio: "",
-    job_title: "",
-    lastName: "",
-    firstName: "",
-    address: { country, street_address, city, state, zip_code },
+    userName: userName,
+    email: email,
+    imageUrl: imageUrl,
+    bio: bio,
+    job_title: job_title,
     skills: [],
   };
-
-  const handleProfileInforUpdate = () => {};
 
   const formik = useFormik({
     initialValues: initialValue,
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
-      setEdit(false);
+       dispatch(userProfileUpdate(values))
+      console.log(values)
+      navigate('/profile')
+      console.log('hello')
     },
   });
 
   return (
     <>
-      <div className=" p-4 ">
+      <div className=" p-4 bg-gray-50 ">
         <div className="">
           <form onSubmit={formik.handleSubmit}>
             <div className="space-y-12">
@@ -97,8 +88,8 @@ export const DetailsUpdate = (setEdit: any) => {
                     <div className="mt-2 md:w-[30rem]">
                       <input
                         type="text"
-                        name="username"
-                        id="username"
+                        name="userName"
+                        id="userName"
                         //
                         onChange={formik.handleChange}
                         value={formik.values.userName}
@@ -109,18 +100,23 @@ export const DetailsUpdate = (setEdit: any) => {
                     </div>
                   </div>
                   <div className="sm:col-span-4 md:flex items-center md:gap-[13rem]">
-                    <label htmlFor="email-address" className="sr-only">
-                      Email address
+                    <label
+                      htmlFor="username"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Email
                     </label>
                     <div className="mt-2 md:w-[30rem]">
                       <input
-                        id="email-address"
+                        type="text"
                         name="email"
-                        type="email"
+                        id="email"
+                        //
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
                         autoComplete="email"
-                        required
-                        className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                        placeholder="Enter your email"
+                        className="block flex-1 w-full border-0 rounded-md py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                        placeholder="email"
                       />
                     </div>
                   </div>
@@ -137,7 +133,7 @@ export const DetailsUpdate = (setEdit: any) => {
                         id="bio"
                         name="bio"
                         onChange={formik.handleChange}
-                        value={bio}
+                        value={formik.values.bio}
                         rows={3}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         defaultValue={""}
@@ -149,7 +145,7 @@ export const DetailsUpdate = (setEdit: any) => {
                   </div>
                   <div className="sm:col-span-4 md:flex items-center md:gap-[14rem]">
                     <label
-                      htmlFor="username"
+                      htmlFor="job_title"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Job title
@@ -158,11 +154,11 @@ export const DetailsUpdate = (setEdit: any) => {
                       <div className="flex rounded-md shadow-sm space-x-2 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                         <input
                           type="text"
-                          name="Job_title"
-                          id="Job_title"
+                          name="job_title"
+                          id="job_title"
                           onChange={formik.handleChange}
-                          value={job_title}
-                          autoComplete="Job_title"
+                          value={formik.values.job_title}
+                          autoComplete="job_title"
                           className="block flex-1 w-full border-0 rounded-md py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="Frontend Developer"
                         />
