@@ -5,3 +5,5 @@ export { JobDetail } from './JobDetail/JobDetail';
 export { HomePage } from './HomePage/HomePage';
 export { LandingPage } from './LandingPage/LandingPage';
 export {Dashboard} from './Dashboard/Dashboard'
+export {ProfileDetails} from './Dashboard/ProfileDetails'
+export {DetailsUpdate} from './Dashboard/DetailsUpdate'

@@ -12,14 +12,13 @@ function classNames(...classes: string[]) {
 
 export const Dashboard = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selected, setSelected] = useState(1);
 
-  console.log(selectedIndex);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setSelectedIndex(newValue);
-    console.log(newValue);
-  };
+  // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  //   setSelectedIndex(newValue);
+  //   console.log(newValue);
+  // };
 
   return (
     <div className="bg-white">
@@ -65,7 +64,7 @@ export const Dashboard = () => {
                     </button>
                   </div>
 
-                  <SideBar />
+                  <SideBar  selected={selected} setSelected={setSelected}/>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -101,41 +100,15 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-2 ">
-            <Tab.Group
-              selectedIndex={selectedIndex}
-              onChange={setSelectedIndex}
-            >
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-                {/* <div className="hidden  lg:block  pt-8 ">
-                  <p className="text-md text-gray-700 pl-5 pb-2 ">Menu</p>
-                  <Tab.List className="p-1">
-                    {categories.map((category) => (
-                      <Tab
-                        key={category.title}
-                        className={({ selected }) =>
-                          classNames(
-                            "w-full flex items-center space-x-5 rounded-md py-2.5 pl-10 text-base font-bold leading-5 text-gray-700",
-                            "ring-white ring-opacity-60 ring-offset-2  focus:outline-none focus:ring-2",
-                            selected
-                              ? "bg-gray-100 "
-                              : "text-blue-100 hover:bg-white/[0.12] hover:text-gray-300"
-                          )
-                        }
-                      >
-                        <p className="text-lg">{category.icon}</p>
-                        <p className="">{category.title}</p>
-                      </Tab>
-                    ))}
-                  </Tab.List>
-                </div> */}
-                <SideBar
-                  selectedIndex={selectedIndex}
-                  onChange={handleChange}
-                />
-                <div className="lg:col-span-4">
-                  <Tab.Panels>
-                    <Tab.Panel>
+          <section aria-labelledby="products-heading" className=" ">
+          
+              <div className="flex item-center">
+                <div className="">
+
+                <SideBar selected={selected} setSelected={setSelected}/>
+                </div>
+                <div className="h-screen flex-1 p-7">
+                
                       <div className="sm:p-4">
                         <div className="grid grid-cols-3 gap-4 mb-4">
                           <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
@@ -209,15 +182,10 @@ export const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                    </Tab.Panel>
-
-                    <Tab.Panel>
-                      <ProfileDetails />
-                    </Tab.Panel>
-                  </Tab.Panels>
+                  
                 </div>
               </div>
-            </Tab.Group>
+           
           </section>
         </main>
       </div>
