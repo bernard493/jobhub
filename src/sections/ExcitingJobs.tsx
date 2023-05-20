@@ -43,7 +43,7 @@ export const ExcitingJobs = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2  md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2  md:grid-cols-4 gap-5 px-[10rem]">
           {categoryDetails.map((card) => (
             <CategoryCard {...card} />
           ))}

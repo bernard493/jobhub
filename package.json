@@ -34,6 +34,7 @@
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",
     "slick-carousel": "^1.8.1",
+    "tailwind-scrollbar": "^3.0.4",
     "tw-elements": "^1.0.0-beta1"
   },
   "devDependencies": {

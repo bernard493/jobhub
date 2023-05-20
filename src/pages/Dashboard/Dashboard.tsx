@@ -14,7 +14,6 @@ export const Dashboard = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selected, setSelected] = useState(1);
 
-
   // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
   //   setSelectedIndex(newValue);
   //   console.log(newValue);
@@ -64,7 +63,7 @@ export const Dashboard = () => {
                     </button>
                   </div>
 
-                  <SideBar  selected={selected} setSelected={setSelected}/>
+                  <SideBar selected={selected} setSelected={setSelected} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -101,91 +100,86 @@ export const Dashboard = () => {
           </div>
 
           <section aria-labelledby="products-heading" className=" ">
-          
-              <div className="flex item-center">
-                <div className="">
-
-                <SideBar selected={selected} setSelected={setSelected}/>
-                </div>
-                <div className="h-screen flex-1 p-7">
-                
-                      <div className="sm:p-4">
-                        <div className="grid grid-cols-3 gap-4 mb-4">
-                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                          <p className="text-2xl text-gray-400 dark:text-gray-500">
-                            +
-                          </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                          <p className="text-2xl text-gray-400 dark:text-gray-500">
-                            +
-                          </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                            <p className="text-2xl text-gray-400 dark:text-gray-500">
-                              +
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                  
+            <div className="flex item-center">
+              <div className="hidden lg:block">
+                <SideBar selected={selected} setSelected={setSelected} />
+              </div>
+              <div className=" flex-1 p-7">
+                <div className="sm:p-4">
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                    <p className="text-2xl text-gray-400 dark:text-gray-500">
+                      +
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                    <p className="text-2xl text-gray-400 dark:text-gray-500">
+                      +
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                      <p className="text-2xl text-gray-400 dark:text-gray-500">
+                        +
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-           
+            </div>
           </section>
         </main>
       </div>

@@ -16,7 +16,8 @@ module.exports = withMT({
         '[auto,auto,1fr]': 'auto auto 1fr',
       },
       fontFamily:{
-        Poppins:  ['Poppins', 'sans-serif']
+        Poppins:  ['Poppins', 'sans-serif'],
+        Montserrat : "Montserrat"
       },
       backgroundImage:
          {
@@ -27,7 +28,8 @@ module.exports = withMT({
   },
  plugins: [
   require('@tailwindcss/forms'),
-  require('flowbite/plugin')
+  require('flowbite/plugin'),
+  // require('@tailwind-scrollbar'),
 ]
 })
 

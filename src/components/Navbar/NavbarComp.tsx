@@ -11,14 +11,16 @@ import { logOut } from "../../features/userSlice";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Find Jobs", href: "dashboard", current: false },
-  { name: "Companies", href: "/", current: false },
-  { name: "About Us", href: "/", current: false },
+  { name: "Find Jobs", href: "job_search", current: false },
   { name: "Post a Job", href: "/", current: false },
+  { name: "About Us", href: "/", current: false },
+  { name: "Contact Us", href: "/contactUs", current: false },
 ];
 const userNavigation = [
+  { name: "Jobs", href: "/job_search" },
+  { name: "Dashboard", href: "/dashboard" },
   { name: "Your Profile", href: "/profile" },
-  { name: "Settings", href: "/" },
+  { name: "Settings", href: "/Settings" },
 ];
 
 function classNames(...classes: string[]) {

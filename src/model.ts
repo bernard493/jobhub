@@ -40,3 +40,11 @@ export interface UserFormInterface {
   password?: string;
   skills: string[];
 }
+
+
+export interface ReviewInterface {
+  name: string;
+  review: string;
+  title: string;
+  profileImg: string;
+}

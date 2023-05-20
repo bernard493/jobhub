@@ -6,13 +6,13 @@ import { HiHome } from "react-icons/hi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export const SideBar = ({selected ,setSelected}: any) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div
       className={` ${
         open ? "w-60" : "w-20 "
-      } bg-gray-800 h-screen p-5  pt-8 relative duration-300`}
+      } bg-gray-800 h-full p-5  pt-8 relative duration-300`}
     >
       {open ? (
         <IoIosArrowForward
@@ -22,7 +22,7 @@ export const SideBar = ({selected ,setSelected}: any) => {
         />
       ) : (
         <IoIosArrowBack
-          className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 text-white border-dark-purple
+          className={`absolute cursor-pointer -right- top-9 w-7 h-7 text-white border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />

@@ -170,7 +170,7 @@ export const Connection = () => {
             ))}
       </div>
       <div className=" flex justify-center  py-[2rem]">
-        <Link to={"dashboard"}>
+        <Link to={"job_search"}>
           <button className=" text-sm h-[3rem] w-[8rem] rounded-lg bg-[#403FF2] text-white">
             <span className="font-bold font-Poppins">Browse all</span>
           </button>
