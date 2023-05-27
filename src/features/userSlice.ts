@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { UserStateInterface } from "../model";
@@ -12,6 +12,7 @@ const initialState: UserStateInterface = {
     
   },
 };
+// export const  loginUser = createAsyncThunk()
 
 export const userSlice = createSlice({
   name: "user",

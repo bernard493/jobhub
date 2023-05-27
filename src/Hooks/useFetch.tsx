@@ -16,10 +16,10 @@ export const useFetch = (endpoint:string,query:queryInter) => {
         method: 'GET',
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
         params: {...query},
-        headers: {
-          // 'X-RapidAPI-Key': '680d731b90msh815c11d4ec7c9ccp1776d5jsnd8245dd120a9',
-          // 'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-        }
+        // headers: {
+        //   'X-RapidAPI-Key': '680d731b90msh815c11d4ec7c9ccp1776d5jsnd8245dd120a9',
+        //   'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+        // }
       };
 
 

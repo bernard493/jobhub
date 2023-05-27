@@ -1,24 +1,30 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Tab, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { SideBar } from "../../components/Sidebar/SideBar";
-import { AiOutlineDashboard } from "react-icons/ai";
-import { FiUsers, FiSettings } from "react-icons/fi";
-import { ProfileDetails } from "./ProfileDetails";
+import { useSelector, useDispatch } from "react-redux"; 
+import {fetchDashboardDate, userSelector} from "../../features/dashboardSlice"
+import { AppDispatch } from "../../app/store";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Dashboard = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const {data,loading} = useSelector(userSelector)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selected, setSelected] = useState(1);
+
+
+  useEffect(()=>{
+    dispatch(fetchDashboardDate())
+  },[])
 
   // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
   //   setSelectedIndex(newValue);
   //   console.log(newValue);
   // };
-
   return (
     <div className="bg-white">
       <div>
@@ -125,7 +131,7 @@ export const Dashboard = () => {
                   </div>
                   <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
                     <p className="text-2xl text-gray-400 dark:text-gray-500">
-                      +
+                  +
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-4">

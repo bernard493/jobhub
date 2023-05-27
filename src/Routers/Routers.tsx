@@ -8,7 +8,6 @@ import {
   JobDetail,
   Dashboard,
   ProfileDetails,
-  DetailsUpdate,
   ContactUs,
 } from "../pages";
 import { allUserState } from "../features/userSlice";
@@ -44,12 +43,12 @@ export const Routers = () => {
       <Route path="/signup" element={<SignUp />} />
 
       <Route
-        path="/job_search"
+        path="/searchjob"
         element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
       />
 
       <Route
-        path="/saved_jobs"
+        path="/savedjobs"
         element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
       />
       <Route
@@ -63,7 +62,7 @@ export const Routers = () => {
       
           <Route
             path="/settings"
-            element={isLoggedIn ? <DetailsUpdate /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
           />
           <Route
             path="/dashboard"

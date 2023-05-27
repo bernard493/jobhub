@@ -6,6 +6,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { allUserState } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import { SideBar } from "../../components/Sidebar/SideBar";
+import { DetailsUpdatePupUp } from "./DetailsUpdatePupUp";
 
 const experience = [
   {
@@ -28,7 +29,7 @@ const experience = [
 export const ProfileDetails = () => {
   const { userName, email, imageUrl, bio, job_title, skills } =
     useSelector(allUserState);
-  const [edit, setEdit] = useState(false);
+  const [open, setOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selected, setSelected] = useState(2);
 
@@ -136,7 +137,7 @@ export const ProfileDetails = () => {
                   <div>
                     <Button
                       gradientDuoTone="purpleToBlue"
-                      onClick={() => setEdit(true)}
+                      onClick={() => setOpen(true)}
                     >
                       Edit Profile
                     </Button>
@@ -245,6 +246,9 @@ export const ProfileDetails = () => {
           </section>
         </main>
       </div>
+      <>
+      <DetailsUpdatePupUp open={open} setOpen={setOpen}/>
+      </>
     </div>
   );
 };
