@@ -1,6 +1,6 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { Input, IconButton } from "@material-tailwind/react";
-import { Badge,Button } from "flowbite-react";
+import { Badge, Button } from "flowbite-react";
 import { HiOutlineSaveAs } from "react-icons/hi";
 import { JobCard } from "../../components/JobCard/JobCard";
 import { SideProfileCom } from "../../components/SideProfileCom/SideProfileCom";
@@ -82,11 +82,25 @@ const jobSearchReducer = (
 };
 
 export const HomePage = () => {
+  const [page, setPage] = useState("1");
   const [jobSearch, dispatch] = useReducer(jobSearchReducer, initialJobSearch);
   const { data, isLoading, error, refetch } = useFetch("search", {
     query: ` ${jobSearch.jobTittle} , ${jobSearch.jobLocation}`,
-    num_pages: "5",
+    num_pages: page,
   });
+
+  console.log(data);
+
+  const getMoreJobs = () => {
+    const nextPageNumber = Number(page) + 1;
+    setPage(nextPageNumber.toString());
+  };
+
+  useEffect(() => {
+    if (Number(page) > 1) {
+      refetch();
+    }
+  }, [page]);
 
   const handleJobFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -131,7 +145,10 @@ export const HomePage = () => {
               </Button>
             </div> */}
             <div className=" ">
-              <HiOutlineSaveAs className="h-6 w-6 text-blue-600 hover:text-blue-400" aria-hidden="true" />
+              <HiOutlineSaveAs
+                className="h-6 w-6 text-blue-600 hover:text-blue-400"
+                aria-hidden="true"
+              />
             </div>
           </div>
           <div className=" flex items-center gap-5">
@@ -158,36 +175,31 @@ export const HomePage = () => {
               </Button>
             </div>
           </div>
-          {/* <div className="w-full h-5 bg-[#c2dff7] rounded-lg">
-            {!isLoading && (
-              <p className=" items-center text-center text-[0.7rem]  font-Poppins font-bold py-1 md:py-2">
-                {`${data.length} Jobs Found`}
-              </p>
-            )}
-          </div> */}
         </div>
-        {
-          !isLoading
-          
-            ? data.map((job: JobDetailInter) => <JobCard {...job} />)
-            : [1, 2, 3].map((Number) => (
-                <div className="border border-blue-300 shadow rounded-md p-4 h-[10rem] w-full ">
-                  <div className="animate-pulse flex space-x-4">
-                    <div className="rounded-full bg-blue-200 h-10 w-10"></div>
-                    <div className="flex-1 space-y-9 py-1">
-                      <div className="h-4 bg-blue-200 rounded"></div>
-                      <div className="space-y-9">
-                        <div className="grid grid-cols-3 gap-4">
-                          <div className="h-4 bg-blue-200 rounded col-span-2"></div>
-                          <div className="h-4 bg-blue-200 rounded col-span-1"></div>
-                        </div>
-                        <div className="h-4 bg-blue-200 rounded"></div>
+        {!isLoading
+          ? data.map((job: JobDetailInter) => <JobCard {...job} />)
+          : [1, 2, 3].map((Number) => (
+              <div className="border border-blue-300 shadow rounded-md p-4 h-[10rem] w-full ">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="rounded-full bg-blue-200 h-10 w-10"></div>
+                  <div className="flex-1 space-y-9 py-1">
+                    <div className="h-4 bg-blue-200 rounded"></div>
+                    <div className="space-y-9">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="h-4 bg-blue-200 rounded col-span-2"></div>
+                        <div className="h-4 bg-blue-200 rounded col-span-1"></div>
                       </div>
+                      <div className="h-4 bg-blue-200 rounded"></div>
                     </div>
                   </div>
                 </div>
-              ))
-        }
+              </div>
+            ))}
+        <button 
+        onClick={getMoreJobs}
+        className=" text-sm h-[3rem] w-[8rem] rounded-lg bg-[#403FF2] text-white">
+          <span className="font-bold font-Poppins">More</span>
+        </button>
       </div>
       <div className="hidden md:block">
         <div className="space-y-6 pr-6">

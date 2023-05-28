@@ -2,7 +2,14 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { UserStateInterface } from "../model";
+import { GoogleAuthProvider,signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
+
 // Define a type for the slice state
+
+
+
+
 
 const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
 
@@ -28,6 +35,7 @@ export const userSlice = createSlice({
     },
 
     userLogin: (state, action) => {
+    
       const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
       const { email, password } = action.payload;
       if (getUserData) {
@@ -40,7 +48,14 @@ export const userSlice = createSlice({
           localStorage.setItem("SIGN_UP", JSON.stringify(loginUser));
         }
       }
+    },  
+
+    googleLogin :()=>{
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth,provider);
     },
+ 
+
     // handle logout and routing
     logOut: (state) => {
       const getUserData = JSON.parse(localStorage.getItem("SIGN_UP") || "{}");
@@ -71,6 +86,6 @@ export const userSlice = createSlice({
 });
 
 export const allUserState = (state: RootState) => state.user.user;
-export const { userSignUp, userLogin, logOut, userProfileUpdate } =
+export const { userSignUp, userLogin, logOut, userProfileUpdate,googleLogin } =
   userSlice.actions;
 export default userSlice.reducer;

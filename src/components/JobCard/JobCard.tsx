@@ -88,7 +88,7 @@ export const JobCard: React.FC<JobDetailInter> = (job) => {
             </div>
             <div className="flex items-center gap-3">
               <Link to={job.job_apply_link}>
-                <button className="h-[2rem] w-[6rem] md:h-[3rem] md:w-[10rem] bg-orange-900 hover:bg-orange-700 rounded-xl">
+                <button className="h-[2rem] w-[6rem] md:h-[3rem] md:w-[10rem] bg-[#403FF2] hover:bg-[#4747c8] rounded-xl">
                   <span className="text-white text-sm">Apply Now</span>
                 </button>
               </Link>

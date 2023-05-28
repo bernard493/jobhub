@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin, allUserState } from "../../features/userSlice";
+import { userLogin, allUserState,googleLogin } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -11,13 +11,21 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email && password) {
       dispatch(userLogin({ email, password }));
     }
   };
-
+  
+  const handleGoogleLogin = async () => {
+    
+    try{
+       await dispatch(googleLogin())
+    } catch (err){
+      console.log(err)
+    }
+   }
   console.log(isLoggedIn)
 
   useEffect(() => {
@@ -103,6 +111,12 @@ export const Login = () => {
               </button>
             </div>
           </form>
+          <button
+          onClick={handleGoogleLogin}
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+              google  Sign in
+              </button>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
