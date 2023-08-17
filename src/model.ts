@@ -25,7 +25,6 @@ export interface UserStateInterface {
     bio: string;
     job_title: string;
     imageUrl: string;
-    password: string;
     isLoggedIn: boolean;
     skills: string[];
   };

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { allUserState, userSignUp } from "../../features/userSlice";
+import { allUserState } from "../../features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Badge, Button, Sidebar } from "flowbite-react";
 
