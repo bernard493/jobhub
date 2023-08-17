@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin, allUserState,googleLogin } from "../../features/userSlice";
+import { userLogin, allUserState, googleLogin } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -17,16 +17,18 @@ export const Login = () => {
       dispatch(userLogin({ email, password }));
     }
   };
-  
+
   const handleGoogleLogin = async () => {
-    
-    try{
-       await dispatch(googleLogin())
-    } catch (err){
-      console.log(err)
+    try {
+      await dispatch(googleLogin());
+    } catch (err) {
+      console.log(err);
     }
-   }
-  console.log(isLoggedIn)
+  };
+
+
+  
+  console.log(isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -111,12 +113,20 @@ export const Login = () => {
               </button>
             </div>
           </form>
-          <button
-          onClick={handleGoogleLogin}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-              google  Sign in
-              </button>
+          <div className="flex items-center justify-center gap-10 py-5">
+            <button
+              onClick={handleGoogleLogin}
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              google Sign in
+            </button>{" "}
+            <button
+              onClick={handleGoogleLogin}
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              GitHub Sign in
+            </button>
+          </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
